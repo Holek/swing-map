@@ -1,0 +1,11 @@
+# Wikidata political alignment (P1387) QID to numeric score mapping
+# Scale: -1.0 (far-left) to +1.0 (far-right), 0 = center
+
+alignment_qid_to_score:
+  Q1129409: -1.0   # far-left
+  Q164597:  -0.8   # left-wing
+  Q737014:  -0.4   # centre-left
+  Q6587194:  0.0   # centrism
+  Q844072:   0.4   # centre-right (labeled "centre" but used as centre-right)
+  Q76074:    0.8   # right-wing
+  Q127869500: 1.0  # far-right

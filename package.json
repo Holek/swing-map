@@ -1,0 +1,27 @@
+{
+  "name": "swing-map",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Interactive world map visualizing political leanings of national governments",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "fetch-data": "tsx scripts/fetch_wikidata.ts",
+    "lint": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/d3": "^7.4.3",
+    "@types/js-yaml": "^4.0.9",
+    "@types/topojson-client": "^3.1.5",
+    "js-yaml": "^4.1.1",
+    "tsx": "^4.21.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.2.4"
+  },
+  "dependencies": {
+    "d3": "^7.9.0",
+    "topojson-client": "^3.1.0"
+  }
+}

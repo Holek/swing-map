@@ -1,0 +1,31 @@
+# Ideology label heuristics → numeric score mapping
+# This is intentionally conservative: only map ideologies that are widely
+# and consistently "left ↔ right" in a generic sense
+# Everything else stays unmapped → "unknown"
+
+ideology_label_rules:
+  # left-ish
+  - match: ["communism", "marxism", "leninism", "trotskyism"]
+    score: -0.9
+  - match: ["democratic socialism", "socialism", "social democracy", "labourism"]
+    score: -0.6
+  - match: ["progressivism", "green politics", "environmentalism", "social liberalism"]
+    score: -0.3
+
+  # center-ish
+  - match: ["centrism", "third way", "radical centrism"]
+    score: 0.0
+  - match: ["liberalism"]   # too broad; treat as near-center unless better signal
+    score: 0.0
+
+  # right-ish
+  - match: ["libertarianism", "classical liberalism", "neoliberalism"]
+    score: 0.3
+  - match: ["conservatism", "liberal conservatism", "christian democracy"]
+    score: 0.5
+  - match: ["national conservatism", "right-wing populism"]
+    score: 0.7
+
+  # far-right-ish
+  - match: ["fascism", "nazism", "neo-nazism", "white nationalism", "ultranationalism"]
+    score: 0.95

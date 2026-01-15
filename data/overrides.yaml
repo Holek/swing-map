@@ -1,0 +1,14 @@
+# Manual overrides for edge cases
+# These will be merged on top of computed results in CI
+# Format same as leanings.yaml countries section
+countries:
+  # Example override (uncomment and modify as needed):
+  # USA:
+  #   score: 0.6
+  #   status: "ok"
+  #   government:
+  #     parties:
+  #       - name: "Custom override"
+  #         position_score: 0.6
+  #         weight: 1.0
+  #     explanation: "Manual override explanation"

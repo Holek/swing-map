@@ -1,0 +1,87 @@
+name: Update Political Leanings Data
+
+on:
+  schedule:
+    # Run weekly on Mondays at 00:00 UTC
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch latest data from Wikidata
+        run: npx tsx scripts/fetch_wikidata.ts
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet data/leanings.yaml public/data/leanings.min.json; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes detected"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected"
+          fi
+
+      - name: Create Pull Request
+        if: steps.check_changes.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: |
+            Update political leanings data
+
+            Automated data update from Wikidata SPARQL query.
+
+            Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+          title: 'Data Update: Political Leanings from Wikidata'
+          body: |
+            ## Automated Data Update
+
+            This PR contains updated political leaning data fetched from Wikidata.
+
+            ### Changes
+            - Updated `data/leanings.yaml` with latest government data
+            - Updated `public/data/leanings.min.json` for frontend consumption
+
+            ### Review Checklist
+            - [ ] Check that scores are reasonable
+            - [ ] Verify no major data quality issues
+            - [ ] Review any newly added countries
+            - [ ] Check for any countries that moved to "unknown" status
+
+            ### Data Source
+            - Wikidata SPARQL endpoint
+            - Query: Head of Government → Party → Political Alignment/Ideology
+            - Scoring model: See `docs/methodology.md`
+
+            **Note:** This PR was automatically generated. Review carefully before merging.
+          branch: data-update-${{ github.run_number }}
+          delete-branch: true
+          labels: |
+            data-update
+            automated
+
+      - name: Summary
+        run: |
+          if [ "${{ steps.check_changes.outputs.has_changes }}" == "true" ]; then
+            echo "✅ Data updated - PR created"
+          else
+            echo "ℹ️ No changes detected - skipping PR"
+          fi
