@@ -341,7 +341,7 @@ function draw(root: HTMLElement, topo: TopologyLike, leanings: LeaningsFile, the
       tooltip.style.display = "block";
       positionTooltip(tooltip, event.clientX, event.clientY);
 
-      const countryName = d.properties?.NAME || d.properties?.ADMIN || iso3 || "Unknown";
+      const countryName = d.properties?.name || d.properties?.NAME || d.properties?.ADMIN || iso3 || "Unknown";
 
       if (entry && typeof entry.score === "number") {
         const partyName = entry.explanation ? extractPartyName(entry.explanation) : "Unknown party";
