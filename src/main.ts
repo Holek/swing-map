@@ -207,6 +207,27 @@ function positionTooltip(tip: HTMLDivElement, x: number, y: number) {
   tip.style.top = `${y + 12}px`;
 }
 
+function renderKofiButton(root: HTMLElement) {
+  const link = document.createElement("a");
+  link.href = "https://ko-fi.com/B0B61SCHEQ";
+  link.target = "_blank";
+  link.style.position = "absolute";
+  link.style.top = "12px";
+  link.style.right = "64px";
+  link.style.display = "block";
+  link.style.lineHeight = "0";
+
+  const img = document.createElement("img");
+  img.src = "https://ko-fi.com/img/githubbutton_sm.svg";
+  img.alt = "Support me on Ko-fi";
+  img.style.height = "36px";
+  img.style.border = "0";
+  img.style.borderRadius = "4px";
+
+  link.appendChild(img);
+  root.appendChild(link);
+}
+
 function renderThemeToggle(root: HTMLElement) {
   const toggle = document.createElement("button");
   toggle.style.position = "absolute";
@@ -331,6 +352,7 @@ function redrawWithTheme(root: HTMLElement, topo: TopologyLike, leanings: Leanin
   root.style.height = "100vh";
   root.style.overflow = "hidden";
   draw(root, topo, leanings, theme);
+  renderKofiButton(root);
   renderThemeToggle(root);
 }
 
@@ -341,6 +363,7 @@ function redrawWithTheme(root: HTMLElement, topo: TopologyLike, leanings: Leanin
 
     const initialTheme = ThemeManager.initialize();
     draw(root, topo, leanings, initialTheme);
+    renderKofiButton(root);
     renderThemeToggle(root);
 
     ThemeManager.subscribe((newTheme) => {
