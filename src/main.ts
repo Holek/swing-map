@@ -207,6 +207,22 @@ function positionTooltip(tip: HTMLDivElement, x: number, y: number) {
   tip.style.top = `${y + 12}px`;
 }
 
+function scoreToBias(score: number): string {
+  if (score <= -0.7) return "Far Left";
+  if (score <= -0.3) return "Left";
+  if (score <= -0.1) return "Center-Left";
+  if (score <= 0.1) return "Center";
+  if (score <= 0.3) return "Center-Right";
+  if (score <= 0.7) return "Right";
+  return "Far Right";
+}
+
+function extractPartyName(explanation: string): string {
+  // Extract party name from "Party Name (method)" format
+  const match = explanation.match(/^(.+?)\s*\(/);
+  return match ? match[1] : explanation;
+}
+
 function renderKofiButton(root: HTMLElement) {
   const link = document.createElement("a");
   link.href = "https://ko-fi.com/B0B61SCHEQ";
@@ -325,18 +341,23 @@ function draw(root: HTMLElement, topo: TopologyLike, leanings: LeaningsFile, the
       tooltip.style.display = "block";
       positionTooltip(tooltip, event.clientX, event.clientY);
 
-      const name = entry?.name || d.properties?.NAME || d.properties?.ADMIN || iso3 || "Unknown";
-      const scoreStr =
-        typeof entry?.score === "number" ? entry.score.toFixed(2) : "unknown";
-      const status = entry?.status || "unknown";
-      const explanation = entry?.explanation || "No details available";
+      const countryName = d.properties?.NAME || d.properties?.ADMIN || iso3 || "Unknown";
 
-      tooltip.innerHTML = `
-        <div style="font-weight:600;margin-bottom:4px;">${name}</div>
-        <div>Score: ${scoreStr} (${status})</div>
-        <div style="opacity:0.8;margin-top:4px;max-width:300px;">${explanation}</div>
-        <div style="opacity:0.6;margin-top:4px;font-size:10px;">Updated: ${leanings.updated_at}</div>
-      `;
+      if (entry && typeof entry.score === "number") {
+        const partyName = entry.explanation ? extractPartyName(entry.explanation) : "Unknown party";
+        const leaning = scoreToBias(entry.score);
+
+        tooltip.innerHTML = `
+          <div style="font-weight:600;margin-bottom:6px;font-size:14px;">${countryName}</div>
+          <div style="margin-bottom:3px;"><strong>Leading party:</strong> ${partyName}</div>
+          <div><strong>Political leaning:</strong> ${leaning}</div>
+        `;
+      } else {
+        tooltip.innerHTML = `
+          <div style="font-weight:600;margin-bottom:6px;font-size:14px;">${countryName}</div>
+          <div style="opacity:0.8;">No political data available</div>
+        `;
+      }
     })
     .on("mouseleave", () => {
       tooltip.style.display = "none";
