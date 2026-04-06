@@ -1,4 +1,4 @@
-updated_at: '2026-01-15T17:03:15.070Z'
+updated_at: '2026-04-06T00:22:57.247Z'
 model:
   scale: '-1..+1'
   method: party-weighted average
@@ -20,7 +20,7 @@ countries:
           weight: 1
       explanation: Italian Social Movement - National Right (ideology-based)
   AUS:
-    score: -0.4000000000000002
+    score: -0.4000000000000001
     status: ok
     sources:
       wikidata_country_qid: Q408
@@ -29,7 +29,7 @@ countries:
       parties:
         - qid: Q216082
           name: Australian Labor Party
-          position_score: -0.4000000000000002
+          position_score: -0.4000000000000001
           weight: 1
       explanation: Australian Labor Party (alignment)
   BRA:
@@ -197,6 +197,19 @@ countries:
           position_score: 0.39999999999999913
           weight: 1
       explanation: National Liberal Party (alignment)
+  ISR:
+    score: 0.8
+    status: ok
+    sources:
+      wikidata_country_qid: Q801
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q187009
+          name: Likud
+          position_score: 0.8
+          weight: 1
+      explanation: Likud (alignment)
   RUS:
     score: null
     status: unknown
@@ -206,32 +219,19 @@ countries:
     government:
       parties: []
       explanation: No governing party data available
-  ISR:
-    score: 0.7999999999999986
+  HND:
+    score: 0.8000000000000002
     status: ok
     sources:
-      wikidata_country_qid: Q801
+      wikidata_country_qid: Q783
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q187009
-          name: Likud
-          position_score: 0.7999999999999986
+        - qid: Q1579466
+          name: National Party of Honduras
+          position_score: 0.8000000000000002
           weight: 1
-      explanation: Likud (alignment)
-  CHN:
-    score: -0.7000000000000001
-    status: approx
-    sources:
-      wikidata_country_qid: Q148
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q17427
-          name: Chinese Communist Party
-          position_score: -0.7000000000000001
-          weight: 1
-      explanation: Chinese Communist Party (ideology-based)
+      explanation: National Party of Honduras (alignment)
   CAN:
     score: -0.19999999999999996
     status: ok
@@ -245,84 +245,6 @@ countries:
           position_score: -0.19999999999999996
           weight: 1
       explanation: Liberal Party of Canada (alignment)
-  GBR:
-    score: -0.4000000000000002
-    status: ok
-    sources:
-      wikidata_country_qid: Q145
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q9630
-          name: Labour Party
-          position_score: -0.4000000000000002
-          weight: 1
-      explanation: Labour Party (alignment)
-  PSE:
-    score: -0.4000000000000001
-    status: ok
-    sources:
-      wikidata_country_qid: Q219060
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q178888
-          name: Fatah
-          position_score: -0.4000000000000001
-          weight: 1
-      explanation: Fatah (alignment)
-  AUT:
-    score: 0.40000000000000013
-    status: ok
-    sources:
-      wikidata_country_qid: Q40
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q186867
-          name: Austrian People's Party
-          position_score: 0.40000000000000013
-          weight: 1
-      explanation: Austrian People's Party (alignment)
-  FRA:
-    score: 0.6000000000000002
-    status: ok
-    sources:
-      wikidata_country_qid: Q142
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q173152
-          name: Union for a Popular Movement
-          position_score: 0.6000000000000002
-          weight: 1
-      explanation: Union for a Popular Movement (alignment)
-  CPV:
-    score: 0.20000000000000004
-    status: ok
-    sources:
-      wikidata_country_qid: Q1011
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q1951190
-          name: Movement for Democracy
-          position_score: 0.20000000000000004
-          weight: 1
-      explanation: Movement for Democracy (alignment)
-  JPN:
-    score: 0.7999999999999999
-    status: ok
-    sources:
-      wikidata_country_qid: Q17
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q232595
-          name: Liberal Democratic Party
-          position_score: 0.7999999999999999
-          weight: 1
-      explanation: Liberal Democratic Party (alignment)
   TUR:
     score: 0.7999999999999983
     status: ok
@@ -336,32 +258,6 @@ countries:
           position_score: 0.7999999999999983
           weight: 1
       explanation: Justice and Development Party (alignment)
-  MLT:
-    score: -0.4
-    status: ok
-    sources:
-      wikidata_country_qid: Q233
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q684886
-          name: Labour Party
-          position_score: -0.4
-          weight: 1
-      explanation: Labour Party (alignment)
-  NIC:
-    score: -0.8
-    status: ok
-    sources:
-      wikidata_country_qid: Q811
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q27389
-          name: Sandinista National Liberation Front
-          position_score: -0.8
-          weight: 1
-      explanation: Sandinista National Liberation Front (alignment)
   PAK:
     score: 0.25
     status: approx
@@ -375,45 +271,6 @@ countries:
           position_score: 0.25
           weight: 1
       explanation: Pakistan Muslim League (N) (ideology-based)
-  DOM:
-    score: -0.3
-    status: approx
-    sources:
-      wikidata_country_qid: Q786
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q31284
-          name: Dominican Revolutionary Party
-          position_score: -0.3
-          weight: 1
-      explanation: Dominican Revolutionary Party (ideology-based)
-  HRV:
-    score: 0.6000000000000002
-    status: ok
-    sources:
-      wikidata_country_qid: Q224
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q738439
-          name: Croatian Democratic Union
-          position_score: 0.6000000000000002
-          weight: 1
-      explanation: Croatian Democratic Union (alignment)
-  MDV:
-    score: null
-    status: unknown
-    sources:
-      wikidata_country_qid: Q826
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q4682455
-          name: Adhaalath Party
-          position_score: null
-          weight: 1
-      explanation: Adhaalath Party (unknown)
   EST:
     score: 0.4000000000000002
     status: ok
@@ -440,6 +297,19 @@ countries:
           position_score: -0.39999999999999974
           weight: 1
       explanation: Spanish Socialist Workers' Party (alignment)
+  AUT:
+    score: 0.40000000000000013
+    status: ok
+    sources:
+      wikidata_country_qid: Q40
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q186867
+          name: Austrian People's Party
+          position_score: 0.40000000000000013
+          weight: 1
+      explanation: Austrian People's Party (alignment)
   CZE:
     score: -1
     status: ok
@@ -453,32 +323,32 @@ countries:
           position_score: -1
           weight: 1
       explanation: Communist Party of Czechoslovakia (alignment)
+  GBR:
+    score: -0.4000000000000002
+    status: ok
+    sources:
+      wikidata_country_qid: Q145
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q9630
+          name: Labour Party
+          position_score: -0.4000000000000002
+          weight: 1
+      explanation: Labour Party (alignment)
   MYS:
-    score: -0.20000000000000004
+    score: 0.8000000000000002
     status: ok
     sources:
       wikidata_country_qid: Q833
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q1756601
-          name: People's Justice Party
-          position_score: -0.20000000000000004
+        - qid: Q1668154
+          name: United Malays National Organisation
+          position_score: 0.8000000000000002
           weight: 1
-      explanation: People's Justice Party (alignment)
-  HND:
-    score: 0
-    status: ok
-    sources:
-      wikidata_country_qid: Q783
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q538272
-          name: Liberal Party of Honduras
-          position_score: 0
-          weight: 1
-      explanation: Liberal Party of Honduras (alignment)
+      explanation: United Malays National Organisation (alignment)
   ETH:
     score: 0
     status: ok
@@ -492,6 +362,19 @@ countries:
           position_score: 0
           weight: 1
       explanation: Prosperity Party (alignment)
+  MLT:
+    score: -0.4
+    status: ok
+    sources:
+      wikidata_country_qid: Q233
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q684886
+          name: Labour Party
+          position_score: -0.4
+          weight: 1
+      explanation: Labour Party (alignment)
   LBR:
     score: 0
     status: approx
@@ -505,6 +388,19 @@ countries:
           position_score: 0
           weight: 1
       explanation: Unity Party (ideology-based)
+  IRN:
+    score: null
+    status: unknown
+    sources:
+      wikidata_country_qid: Q794
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q327591
+          name: independent politician
+          position_score: null
+          weight: 1
+      explanation: independent politician (unknown)
   GTM:
     score: -0.4
     status: ok
@@ -518,19 +414,6 @@ countries:
           position_score: -0.4
           weight: 1
       explanation: Semilla Movement (alignment)
-  IRN:
-    score: null
-    status: unknown
-    sources:
-      wikidata_country_qid: Q794
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q327591
-          name: Independent politician
-          position_score: null
-          weight: 1
-      explanation: Independent politician (unknown)
   COL:
     score: -0.6
     status: approx
@@ -539,11 +422,11 @@ countries:
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q52117391
-          name: Alianza Democrática
+        - qid: Q2251452
+          name: Alternative Democratic Pole
           position_score: -0.6
           weight: 1
-      explanation: Alianza Democrática (ideology-based)
+      explanation: Alternative Democratic Pole (ideology-based)
   MEX:
     score: -0.4
     status: ok
@@ -583,63 +466,71 @@ countries:
           position_score: 0.19999999999999998
           weight: 1
       explanation: Europe Now (alignment)
-  LIE:
-    score: 0.40000000000000013
+  PSE:
+    score: -0.4000000000000001
     status: ok
     sources:
-      wikidata_country_qid: Q347
+      wikidata_country_qid: Q219060
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q49673
-          name: Fatherland Union
-          position_score: 0.40000000000000013
+        - qid: Q178888
+          name: Fatah
+          position_score: -0.4000000000000001
           weight: 1
-      explanation: Fatherland Union (alignment)
-  DEU:
-    score: 0.2000000000000001
-    status: ok
+      explanation: Fatah (alignment)
+  CHN:
+    score: -0.7000000000000001
+    status: approx
     sources:
-      wikidata_country_qid: Q183
+      wikidata_country_qid: Q148
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q49762
-          name: Christian Democratic Union
-          position_score: 0.2000000000000001
+        - qid: Q17427
+          name: Chinese Communist Party
+          position_score: -0.7000000000000001
           weight: 1
-      explanation: Christian Democratic Union (alignment)
-  IRL:
-    score: 0.19999999999999998
+      explanation: Chinese Communist Party (ideology-based)
+  FRA:
+    score: 0.6000000000000002
     status: ok
     sources:
-      wikidata_country_qid: Q27
+      wikidata_country_qid: Q142
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q216517
-          name: Fianna Fáil
-          position_score: 0.19999999999999998
+        - qid: Q173152
+          name: Union for a Popular Movement
+          position_score: 0.6000000000000002
           weight: 1
-      explanation: Fianna Fáil (alignment)
-  GNB:
-    score: null
-    status: unknown
+      explanation: Union for a Popular Movement (alignment)
+  CPV:
+    score: 0.20000000000000004
+    status: ok
     sources:
-      wikidata_country_qid: Q1007
+      wikidata_country_qid: Q1011
       sparql_query_url: https://query.wikidata.org/sparql
     government:
-      parties: []
-      explanation: No governing party data available
-  LBN:
-    score: null
-    status: unknown
+      parties:
+        - qid: Q1951190
+          name: Movement for Democracy
+          position_score: 0.20000000000000004
+          weight: 1
+      explanation: Movement for Democracy (alignment)
+  JPN:
+    score: 0.7999999999999999
+    status: ok
     sources:
-      wikidata_country_qid: Q822
+      wikidata_country_qid: Q17
       sparql_query_url: https://query.wikidata.org/sparql
     government:
-      parties: []
-      explanation: No governing party data available
+      parties:
+        - qid: Q232595
+          name: Liberal Democratic Party
+          position_score: 0.7999999999999999
+          weight: 1
+      explanation: Liberal Democratic Party (alignment)
   IND:
     score: 0.8000000000000003
     status: ok
@@ -653,84 +544,19 @@ countries:
           position_score: 0.8000000000000003
           weight: 1
       explanation: Bharatiya Janata Party (alignment)
-  SVK:
-    score: -1
+  LIE:
+    score: 0.40000000000000013
     status: ok
     sources:
-      wikidata_country_qid: Q214
+      wikidata_country_qid: Q347
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q727724
-          name: Communist Party of Czechoslovakia
-          position_score: -1
+        - qid: Q49673
+          name: Fatherland Union
+          position_score: 0.40000000000000013
           weight: 1
-      explanation: Communist Party of Czechoslovakia (alignment)
-  GRC:
-    score: 0.4000000000000001
-    status: ok
-    sources:
-      wikidata_country_qid: Q41
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q223153
-          name: New Democracy
-          position_score: 0.4000000000000001
-          weight: 1
-      explanation: New Democracy (alignment)
-  PRT:
-    score: 0.39999999999999997
-    status: ok
-    sources:
-      wikidata_country_qid: Q45
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q595575
-          name: Social Democratic Party
-          position_score: 0.39999999999999997
-          weight: 1
-      explanation: Social Democratic Party (alignment)
-  NAM:
-    score: -0.5999999999999998
-    status: ok
-    sources:
-      wikidata_country_qid: Q1030
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q467711
-          name: SWAPO Party
-          position_score: -0.5999999999999998
-          weight: 1
-      explanation: SWAPO Party (alignment)
-  MRT:
-    score: null
-    status: unknown
-    sources:
-      wikidata_country_qid: Q1025
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q112939010
-          name: Equity Party
-          position_score: null
-          weight: 1
-      explanation: Equity Party (unknown)
-  SLV:
-    score: -0.6
-    status: approx
-    sources:
-      wikidata_country_qid: Q792
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q648924
-          name: Farabundo Martí National Liberation Front
-          position_score: -0.6
-          weight: 1
-      explanation: Farabundo Martí National Liberation Front (ideology-based)
+      explanation: Fatherland Union (alignment)
   POL:
     score: 0.19999999999999998
     status: ok
@@ -757,84 +583,50 @@ countries:
           position_score: -0.6
           weight: 1
       explanation: Gibraltar Socialist Labour Party (ideology-based)
-  FJI:
-    score: 0.8
-    status: ok
+  LBN:
+    score: null
+    status: unknown
     sources:
-      wikidata_country_qid: Q712
+      wikidata_country_qid: Q822
       sparql_query_url: https://query.wikidata.org/sparql
     government:
-      parties:
-        - qid: Q7563246
-          name: Soqosoqo ni Vakavulewa ni Taukei
-          position_score: 0.8
-          weight: 1
-      explanation: Soqosoqo ni Vakavulewa ni Taukei (alignment)
-  BIH:
-    score: 0.5
+      parties: []
+      explanation: No governing party data available
+  KAZ:
+    score: null
+    status: unknown
+    sources:
+      wikidata_country_qid: Q232
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties: []
+      explanation: No governing party data available
+  SLV:
+    score: -0.6
     status: approx
     sources:
-      wikidata_country_qid: Q225
+      wikidata_country_qid: Q792
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q16792
-          name: Croatian Democratic Union of Bosnia and Herzegovina
-          position_score: 0.5
+        - qid: Q648924
+          name: Farabundo Martí National Liberation Front
+          position_score: -0.6
           weight: 1
-      explanation: Croatian Democratic Union of Bosnia and Herzegovina (ideology-based)
-  LTU:
-    score: -0.4
-    status: ok
-    sources:
-      wikidata_country_qid: Q37
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q4362
-          name: Social Democratic Party of Lithuania
-          position_score: -0.4
-          weight: 1
-      explanation: Social Democratic Party of Lithuania (alignment)
-  BLZ:
-    score: -0.40000000000000013
-    status: ok
-    sources:
-      wikidata_country_qid: Q242
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q1759613
-          name: People's United Party
-          position_score: -0.40000000000000013
-          weight: 1
-      explanation: People's United Party (alignment)
-  NER:
-    score: 0.5
+      explanation: Farabundo Martí National Liberation Front (ideology-based)
+  SVK:
+    score: -0.6
     status: approx
     sources:
-      wikidata_country_qid: Q1032
+      wikidata_country_qid: Q214
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q1968011
-          name: National Movement for the Development of Society
-          position_score: 0.5
+        - qid: Q3079712
+          name: Party of the Democratic Left
+          position_score: -0.6
           weight: 1
-      explanation: National Movement for the Development of Society (ideology-based)
-  LUX:
-    score: 0.39999999999999997
-    status: ok
-    sources:
-      wikidata_country_qid: Q32
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q1344670
-          name: Christian Social People's Party
-          position_score: 0.39999999999999997
-          weight: 1
-      explanation: Christian Social People's Party (alignment)
+      explanation: Party of the Democratic Left (ideology-based)
   CRI:
     score: null
     status: unknown
@@ -848,41 +640,6 @@ countries:
           position_score: null
           weight: 1
       explanation: Social Democratic Progress Party (unknown)
-  NRU:
-    score: 0.39999999999999997
-    status: ok
-    sources:
-      wikidata_country_qid: Q697
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q1964815
-          name: Nauru First
-          position_score: 0.39999999999999997
-          weight: 1
-      explanation: Nauru First (alignment)
-  GHA:
-    score: 0.4
-    status: ok
-    sources:
-      wikidata_country_qid: Q117
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q1148441
-          name: New Patriotic Party
-          position_score: 0.4
-          weight: 1
-      explanation: New Patriotic Party (alignment)
-  KAZ:
-    score: null
-    status: unknown
-    sources:
-      wikidata_country_qid: Q232
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties: []
-      explanation: No governing party data available
   PAN:
     score: null
     status: unknown
@@ -927,6 +684,19 @@ countries:
     government:
       parties: []
       explanation: No governing party data available
+  LUX:
+    score: 0.39999999999999997
+    status: ok
+    sources:
+      wikidata_country_qid: Q32
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q1344670
+          name: Christian Social People's Party
+          position_score: 0.39999999999999997
+          weight: 1
+      explanation: Christian Social People's Party (alignment)
   BRB:
     score: -0.4
     status: ok
@@ -940,6 +710,71 @@ countries:
           position_score: -0.4
           weight: 1
       explanation: Barbados Labour Party (alignment)
+  GRD:
+    score: 0
+    status: ok
+    sources:
+      wikidata_country_qid: Q769
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q1254278
+          name: National Democratic Congress
+          position_score: 0
+          weight: 1
+      explanation: National Democratic Congress (alignment)
+  NIC:
+    score: -0.8
+    status: ok
+    sources:
+      wikidata_country_qid: Q811
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q27389
+          name: Sandinista National Liberation Front
+          position_score: -0.8
+          weight: 1
+      explanation: Sandinista National Liberation Front (alignment)
+  DOM:
+    score: -0.3
+    status: approx
+    sources:
+      wikidata_country_qid: Q786
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q31284
+          name: Dominican Revolutionary Party
+          position_score: -0.3
+          weight: 1
+      explanation: Dominican Revolutionary Party (ideology-based)
+  BIH:
+    score: 0.5
+    status: approx
+    sources:
+      wikidata_country_qid: Q225
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q16792
+          name: Croatian Democratic Union of Bosnia and Herzegovina
+          position_score: 0.5
+          weight: 1
+      explanation: Croatian Democratic Union of Bosnia and Herzegovina (ideology-based)
+  LTU:
+    score: -0.4
+    status: ok
+    sources:
+      wikidata_country_qid: Q37
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q4362
+          name: Social Democratic Party of Lithuania
+          position_score: -0.4
+          weight: 1
+      explanation: Social Democratic Party of Lithuania (alignment)
   DMA:
     score: -0.6
     status: approx
@@ -953,19 +788,80 @@ countries:
           position_score: -0.6
           weight: 1
       explanation: Dominica Labour Party (ideology-based)
-  SVN:
+  MDV:
+    score: 0.5
+    status: approx
+    sources:
+      wikidata_country_qid: Q826
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q61750742
+          name: People's National Congress
+          position_score: 0.5
+          weight: 1
+      explanation: People's National Congress (ideology-based)
+  YEM:
+    score: null
+    status: unknown
+    sources:
+      wikidata_country_qid: Q805
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties: []
+      explanation: No governing party data available
+  HRV:
+    score: 0.6000000000000002
+    status: ok
+    sources:
+      wikidata_country_qid: Q224
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q738439
+          name: Croatian Democratic Union
+          position_score: 0.6000000000000002
+          weight: 1
+      explanation: Croatian Democratic Union (alignment)
+  KNA:
     score: -0.4
     status: ok
+    sources:
+      wikidata_country_qid: Q763
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q250738
+          name: Saint Kitts and Nevis Labour Party
+          position_score: -0.4
+          weight: 1
+      explanation: Saint Kitts and Nevis Labour Party (alignment)
+  MRT:
+    score: null
+    status: unknown
+    sources:
+      wikidata_country_qid: Q1025
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q112939010
+          name: Equity Party
+          position_score: null
+          weight: 1
+      explanation: Equity Party (unknown)
+  SVN:
+    score: 0
+    status: approx
     sources:
       wikidata_country_qid: Q215
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q678466
-          name: Positive Slovenia
-          position_score: -0.4
+        - qid: Q1258672
+          name: Liberal Democracy of Slovenia
+          position_score: 0
           weight: 1
-      explanation: Positive Slovenia (alignment)
+      explanation: Liberal Democracy of Slovenia (ideology-based)
   BLR:
     score: null
     status: unknown
@@ -1010,10 +906,10 @@ countries:
     government:
       parties:
         - qid: Q327591
-          name: Independent politician
+          name: independent politician
           position_score: null
           weight: 1
-      explanation: Independent politician (unknown)
+      explanation: independent politician (unknown)
   JOR:
     score: null
     status: unknown
@@ -1023,6 +919,19 @@ countries:
     government:
       parties: []
       explanation: No governing party data available
+  CHL:
+    score: null
+    status: unknown
+    sources:
+      wikidata_country_qid: Q298
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q327591
+          name: independent politician
+          position_score: null
+          weight: 1
+      explanation: independent politician (unknown)
   GEO:
     score: 0
     status: ok
@@ -1049,19 +958,6 @@ countries:
           position_score: null
           weight: 1
       explanation: People's National Congress Party (unknown)
-  SGP:
-    score: 0.39999999999999997
-    status: ok
-    sources:
-      wikidata_country_qid: Q334
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q371395
-          name: People's Action Party
-          position_score: 0.39999999999999997
-          weight: 1
-      explanation: People's Action Party (alignment)
   ARM:
     score: 0
     status: ok
@@ -1075,67 +971,19 @@ countries:
           position_score: 0
           weight: 1
       explanation: Armenian National Congress (alignment)
-  WSM:
-    score: null
-    status: unknown
-    sources:
-      wikidata_country_qid: Q683
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q104853338
-          name: Faʻatuatua i le Atua Samoa ua Tasi
-          position_score: null
-          weight: 1
-      explanation: Faʻatuatua i le Atua Samoa ua Tasi (unknown)
-  BHS:
-    score: -0.29999999999999993
-    status: approx
-    sources:
-      wikidata_country_qid: Q778
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q2566823
-          name: Progressive Liberal Party
-          position_score: -0.29999999999999993
-          weight: 1
-      explanation: Progressive Liberal Party (ideology-based)
-  YEM:
-    score: null
-    status: unknown
-    sources:
-      wikidata_country_qid: Q805
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties: []
-      explanation: No governing party data available
-  GRD:
-    score: 0
+  IRL:
+    score: 0.19999999999999998
     status: ok
     sources:
-      wikidata_country_qid: Q769
+      wikidata_country_qid: Q27
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q1254278
-          name: National Democratic Congress
-          position_score: 0
+        - qid: Q216517
+          name: Fianna Fáil
+          position_score: 0.19999999999999998
           weight: 1
-      explanation: National Democratic Congress (alignment)
-  SUR:
-    score: -0.6
-    status: ok
-    sources:
-      wikidata_country_qid: Q730
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q2420320
-          name: National Democratic Party
-          position_score: -0.6
-          weight: 1
-      explanation: National Democratic Party (alignment)
+      explanation: Fianna Fáil (alignment)
   IRQ:
     score: null
     status: unknown
@@ -1172,35 +1020,40 @@ countries:
       parties: []
       explanation: No governing party data available
   MNG:
-    score: -0.5999999999999994
-    status: ok
+    score: null
+    status: unknown
     sources:
       wikidata_country_qid: Q711
       sparql_query_url: https://query.wikidata.org/sparql
     government:
-      parties:
-        - qid: Q1127178
-          name: Mongolian People's Party
-          position_score: -0.5999999999999994
-          weight: 1
-      explanation: Mongolian People's Party (alignment)
-  MKD:
-    score: 0.3333333333333333
-    status: approx
+      parties: []
+      explanation: No governing party data available
+  NAM:
+    score: -0.5999999999999998
+    status: ok
     sources:
-      wikidata_country_qid: Q221
+      wikidata_country_qid: Q1030
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q945717
-          name: >-
-            Internal Macedonian Revolutionary Organization – Democratic Party
-            for Macedonian National Unity
-          position_score: 0.3333333333333333
+        - qid: Q467711
+          name: SWAPO Party
+          position_score: -0.5999999999999998
           weight: 1
-      explanation: >-
-        Internal Macedonian Revolutionary Organization – Democratic Party for
-        Macedonian National Unity (ideology-based)
+      explanation: SWAPO Party (alignment)
+  SGP:
+    score: 0.39999999999999997
+    status: ok
+    sources:
+      wikidata_country_qid: Q334
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q371395
+          name: People's Action Party
+          position_score: 0.39999999999999997
+          weight: 1
+      explanation: People's Action Party (alignment)
   MDA:
     score: null
     status: unknown
@@ -1211,18 +1064,66 @@ countries:
       parties: []
       explanation: No governing party data available
   LAO:
-    score: -0.8
-    status: ok
+    score: null
+    status: unknown
     sources:
       wikidata_country_qid: Q819
       sparql_query_url: https://query.wikidata.org/sparql
     government:
+      parties: []
+      explanation: No governing party data available
+  BHS:
+    score: -0.29999999999999993
+    status: approx
+    sources:
+      wikidata_country_qid: Q778
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
       parties:
-        - qid: Q756180
-          name: Lao People's Revolutionary Party
-          position_score: -0.8
+        - qid: Q2566823
+          name: Progressive Liberal Party
+          position_score: -0.29999999999999993
           weight: 1
-      explanation: Lao People's Revolutionary Party (alignment)
+      explanation: Progressive Liberal Party (ideology-based)
+  BLZ:
+    score: -0.40000000000000013
+    status: ok
+    sources:
+      wikidata_country_qid: Q242
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q1759613
+          name: People's United Party
+          position_score: -0.40000000000000013
+          weight: 1
+      explanation: People's United Party (alignment)
+  NER:
+    score: 0.5
+    status: approx
+    sources:
+      wikidata_country_qid: Q1032
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q1968011
+          name: National Movement for the Development of Society
+          position_score: 0.5
+          weight: 1
+      explanation: National Movement for the Development of Society (ideology-based)
+  SUR:
+    score: -0.6
+    status: ok
+    sources:
+      wikidata_country_qid: Q730
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q2420320
+          name: National Democratic Party
+          position_score: -0.6
+          weight: 1
+      explanation: National Democratic Party (alignment)
   TCD:
     score: null
     status: unknown
@@ -1258,6 +1159,23 @@ countries:
     government:
       parties: []
       explanation: No governing party data available
+  MKD:
+    score: 0.3333333333333333
+    status: approx
+    sources:
+      wikidata_country_qid: Q221
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q945717
+          name: >-
+            Internal Macedonian Revolutionary Organization – Democratic Party
+            for Macedonian National Unity
+          position_score: 0.3333333333333333
+          weight: 1
+      explanation: >-
+        Internal Macedonian Revolutionary Organization – Democratic Party for
+        Macedonian National Unity (ideology-based)
   TTO:
     score: -0.4
     status: ok
@@ -1323,6 +1241,19 @@ countries:
           position_score: -0.7999999999999999
           weight: 1
       explanation: Communist Party of Vietnam (alignment)
+  PRT:
+    score: 0.39999999999999997
+    status: ok
+    sources:
+      wikidata_country_qid: Q45
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q595575
+          name: Social Democratic Party
+          position_score: 0.39999999999999997
+          weight: 1
+      explanation: Social Democratic Party (alignment)
   KWT:
     score: null
     status: unknown
@@ -1332,10 +1263,10 @@ countries:
     government:
       parties:
         - qid: Q327591
-          name: Independent politician
+          name: independent politician
           position_score: null
           weight: 1
-      explanation: Independent politician (unknown)
+      explanation: independent politician (unknown)
   BGR:
     score: 0.39999999999999997
     status: ok
@@ -1384,10 +1315,10 @@ countries:
     government:
       parties:
         - qid: Q327591
-          name: Independent politician
+          name: independent politician
           position_score: null
           weight: 1
-      explanation: Independent politician (unknown)
+      explanation: independent politician (unknown)
   SWZ:
     score: null
     status: unknown
@@ -1467,6 +1398,15 @@ countries:
           position_score: -0.4000000000000001
           weight: 1
       explanation: People's Democratic Party of Tajikistan (alignment)
+  SDN:
+    score: null
+    status: unknown
+    sources:
+      wikidata_country_qid: Q1049
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties: []
+      explanation: No governing party data available
   BOL:
     score: null
     status: unknown
@@ -1489,19 +1429,94 @@ countries:
           position_score: 0.4000000000000001
           weight: 1
       explanation: Malawi Congress Party (alignment)
-  CHL:
-    score: -0.7999999999999999
-    status: ok
+  ATG:
+    score: null
+    status: unknown
     sources:
-      wikidata_country_qid: Q298
+      wikidata_country_qid: Q781
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q63565503
-          name: Social Convergence
-          position_score: -0.7999999999999999
+        - qid: Q1277738
+          name: Antigua and Barbuda Labour Party
+          position_score: null
           weight: 1
-      explanation: Social Convergence (alignment)
+      explanation: Antigua and Barbuda Labour Party (unknown)
+  DZA:
+    score: null
+    status: unknown
+    sources:
+      wikidata_country_qid: Q262
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties: []
+      explanation: No governing party data available
+  CIV:
+    score: null
+    status: unknown
+    sources:
+      wikidata_country_qid: Q1008
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties: []
+      explanation: No governing party data available
+  MLI:
+    score: null
+    status: unknown
+    sources:
+      wikidata_country_qid: Q912
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties: []
+      explanation: No governing party data available
+  MCO:
+    score: null
+    status: unknown
+    sources:
+      wikidata_country_qid: Q235
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties: []
+      explanation: No governing party data available
+  MUS:
+    score: -0.6
+    status: approx
+    sources:
+      wikidata_country_qid: Q1027
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q6851928
+          name: Militant Socialist Movement
+          position_score: -0.6
+          weight: 1
+      explanation: Militant Socialist Movement (ideology-based)
+  MMR:
+    score: 0.5
+    status: approx
+    sources:
+      wikidata_country_qid: Q836
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q1318070
+          name: Union Solidarity and Development Party
+          position_score: 0.5
+          weight: 1
+      explanation: Union Solidarity and Development Party (ideology-based)
+  NGA:
+    score: 0
+    status: approx
+    sources:
+      wikidata_country_qid: Q1033
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q343617
+          name: Action Congress of Nigeria
+          position_score: 0
+          weight: 1
+      explanation: Action Congress of Nigeria (ideology-based)
   DJI:
     score: null
     status: unknown
@@ -1528,15 +1543,6 @@ countries:
           position_score: 0
           weight: 1
       explanation: Democratic Party of Korea (alignment)
-  SDN:
-    score: null
-    status: unknown
-    sources:
-      wikidata_country_qid: Q1049
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties: []
-      explanation: No governing party data available
   BDI:
     score: null
     status: unknown
@@ -1546,19 +1552,6 @@ countries:
     government:
       parties: []
       explanation: No governing party data available
-  ATG:
-    score: null
-    status: unknown
-    sources:
-      wikidata_country_qid: Q781
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q1277738
-          name: Antigua and Barbuda Labour Party
-          position_score: null
-          weight: 1
-      explanation: Antigua and Barbuda Labour Party (unknown)
   SEN:
     score: null
     status: unknown
@@ -1585,6 +1578,54 @@ countries:
           position_score: -0.4
           weight: 1
       explanation: Patriotic Front (alignment)
+  PHL:
+    score: -0.6
+    status: approx
+    sources:
+      wikidata_country_qid: Q928
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q60749150
+          name: Partido Federal ng Pilipinas
+          position_score: -0.6
+          weight: 1
+      explanation: Partido Federal ng Pilipinas (ideology-based)
+  STP:
+    score: null
+    status: unknown
+    sources:
+      wikidata_country_qid: Q1039
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties: []
+      explanation: No governing party data available
+  COM:
+    score: -0.4
+    status: ok
+    sources:
+      wikidata_country_qid: Q970
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q5166253
+          name: Convention for the Renewal of the Comoros
+          position_score: -0.4
+          weight: 1
+      explanation: Convention for the Renewal of the Comoros (alignment)
+  FJI:
+    score: null
+    status: unknown
+    sources:
+      wikidata_country_qid: Q712
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q110677493
+          name: People's Alliance
+          position_score: null
+          weight: 1
+      explanation: People's Alliance (unknown)
   ZAF:
     score: -0.4
     status: ok
@@ -1598,6 +1639,45 @@ countries:
           position_score: -0.4
           weight: 1
       explanation: African National Congress (alignment)
+  MAR:
+    score: 0.4
+    status: ok
+    sources:
+      wikidata_country_qid: Q1028
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q1630297
+          name: National Rally of Independents
+          position_score: 0.4
+          weight: 1
+      explanation: National Rally of Independents (alignment)
+  IDN:
+    score: 0.8
+    status: ok
+    sources:
+      wikidata_country_qid: Q252
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q4261459
+          name: Great Indonesia Movement Party
+          position_score: 0.8
+          weight: 1
+      explanation: Great Indonesia Movement Party (alignment)
+  WSM:
+    score: null
+    status: unknown
+    sources:
+      wikidata_country_qid: Q683
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q104853338
+          name: Faʻatuatua i le Atua Samoa ua Tasi
+          position_score: null
+          weight: 1
+      explanation: Faʻatuatua i le Atua Samoa ua Tasi (unknown)
   CUB:
     score: -0.9000000000000001
     status: ok
@@ -1624,41 +1704,93 @@ countries:
           position_score: 0.39999999999999997
           weight: 1
       explanation: Democratic Rally (alignment)
-  MAR:
-    score: 0.4
+  DEU:
+    score: 0.2000000000000001
     status: ok
     sources:
-      wikidata_country_qid: Q1028
+      wikidata_country_qid: Q183
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q1630297
-          name: National Rally of Independents
-          position_score: 0.4
+        - qid: Q49762
+          name: Christian Democratic Union
+          position_score: 0.2000000000000001
           weight: 1
-      explanation: National Rally of Independents (alignment)
-  IDN:
-    score: 0.25
-    status: approx
-    sources:
-      wikidata_country_qid: Q252
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q1536552
-          name: Golkar
-          position_score: 0.25
-          weight: 1
-      explanation: Golkar (ideology-based)
-  MLI:
+      explanation: Christian Democratic Union (alignment)
+  GNB:
     score: null
     status: unknown
     sources:
-      wikidata_country_qid: Q912
+      wikidata_country_qid: Q1007
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties: []
       explanation: No governing party data available
+  GRC:
+    score: 0.4000000000000001
+    status: ok
+    sources:
+      wikidata_country_qid: Q41
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q223153
+          name: New Democracy
+          position_score: 0.4000000000000001
+          weight: 1
+      explanation: New Democracy (alignment)
+  NRU:
+    score: 0.39999999999999997
+    status: ok
+    sources:
+      wikidata_country_qid: Q697
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q1964815
+          name: Nauru First
+          position_score: 0.39999999999999997
+          weight: 1
+      explanation: Nauru First (alignment)
+  GHA:
+    score: 0.4
+    status: ok
+    sources:
+      wikidata_country_qid: Q117
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q1148441
+          name: New Patriotic Party
+          position_score: 0.4
+          weight: 1
+      explanation: New Patriotic Party (alignment)
+  URY:
+    score: -0.4000000000000001
+    status: ok
+    sources:
+      wikidata_country_qid: Q77
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q1066799
+          name: Broad Front
+          position_score: -0.4000000000000001
+          weight: 1
+      explanation: Broad Front (alignment)
+  PRY:
+    score: 0.2
+    status: ok
+    sources:
+      wikidata_country_qid: Q733
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q928949
+          name: Colorado Party
+          position_score: 0.2
+          weight: 1
+      explanation: Colorado Party (alignment)
   FSM:
     score: null
     status: unknown
@@ -1677,19 +1809,10 @@ countries:
     government:
       parties:
         - qid: Q327591
-          name: Independent politician
+          name: independent politician
           position_score: null
           weight: 1
-      explanation: Independent politician (unknown)
-  DZA:
-    score: null
-    status: unknown
-    sources:
-      wikidata_country_qid: Q262
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties: []
-      explanation: No governing party data available
+      explanation: independent politician (unknown)
   AND:
     score: 0.4
     status: ok
@@ -1703,19 +1826,32 @@ countries:
           position_score: 0.4
           weight: 1
       explanation: Democrats for Andorra (alignment)
+  GIN:
+    score: -0.3
+    status: approx
+    sources:
+      wikidata_country_qid: Q1006
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q577455
+          name: Union of Democratic Forces of Guinea
+          position_score: -0.3
+          weight: 1
+      explanation: Union of Democratic Forces of Guinea (ideology-based)
   NLD:
-    score: -0.8
+    score: 0
     status: ok
     sources:
       wikidata_country_qid: Q29999
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q275441
-          name: Labour Party
-          position_score: -0.8
+        - qid: Q747910
+          name: Democrats 66
+          position_score: 0
           weight: 1
-      explanation: Labour Party (alignment)
+      explanation: Democrats 66 (alignment)
   QAT:
     score: null
     status: unknown
@@ -1725,10 +1861,10 @@ countries:
     government:
       parties:
         - qid: Q327591
-          name: Independent politician
+          name: independent politician
           position_score: null
           weight: 1
-      explanation: Independent politician (unknown)
+      explanation: independent politician (unknown)
   CAF:
     score: null
     status: unknown
@@ -1747,10 +1883,10 @@ countries:
     government:
       parties:
         - qid: Q327591
-          name: Independent politician
+          name: independent politician
           position_score: null
           weight: 1
-      explanation: Independent politician (unknown)
+      explanation: independent politician (unknown)
   AGO:
     score: -0.6000000000000001
     status: ok
@@ -1773,75 +1909,10 @@ countries:
     government:
       parties:
         - qid: Q327591
-          name: Independent politician
+          name: independent politician
           position_score: null
           weight: 1
-      explanation: Independent politician (unknown)
-  SRB:
-    score: null
-    status: unknown
-    sources:
-      wikidata_country_qid: Q403
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q327591
-          name: Independent politician
-          position_score: null
-          weight: 1
-      explanation: Independent politician (unknown)
-  EGY:
-    score: null
-    status: unknown
-    sources:
-      wikidata_country_qid: Q79
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q327591
-          name: Independent politician
-          position_score: null
-          weight: 1
-      explanation: Independent politician (unknown)
-  URY:
-    score: -0.4000000000000001
-    status: ok
-    sources:
-      wikidata_country_qid: Q77
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q1066799
-          name: Broad Front
-          position_score: -0.4000000000000001
-          weight: 1
-      explanation: Broad Front (alignment)
-  GIN:
-    score: -0.3
-    status: approx
-    sources:
-      wikidata_country_qid: Q1006
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q577455
-          name: Union of Democratic Forces of Guinea
-          position_score: -0.3
-          weight: 1
-      explanation: Union of Democratic Forces of Guinea (ideology-based)
-  PRY:
-    score: 0.2
-    status: ok
-    sources:
-      wikidata_country_qid: Q733
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q928949
-          name: Colorado Party
-          position_score: 0.2
-          weight: 1
-      explanation: Colorado Party (alignment)
+      explanation: independent politician (unknown)
   GMB:
     score: null
     status: unknown
@@ -1850,37 +1921,11 @@ countries:
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q97180861
-          name: National People's Party
+        - qid: Q1786600
+          name: National Reconciliation Party
           position_score: null
           weight: 1
-      explanation: National People's Party (unknown)
-  ARG:
-    score: 0.8000000000000002
-    status: ok
-    sources:
-      wikidata_country_qid: Q414
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q105099519
-          name: Avanza Libertad
-          position_score: 0.8000000000000002
-          weight: 1
-      explanation: Avanza Libertad (alignment)
-  KIR:
-    score: null
-    status: unknown
-    sources:
-      wikidata_country_qid: Q710
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q23058731
-          name: Tobwaan Kiribati Party
-          position_score: null
-          weight: 1
-      explanation: Tobwaan Kiribati Party (unknown)
+      explanation: National Reconciliation Party (unknown)
   UZB:
     score: 0.20000000000000004
     status: ok
@@ -1920,41 +1965,19 @@ countries:
           position_score: -0.6
           weight: 1
       explanation: People's Party for Reconstruction and Democracy (ideology-based)
-  TKM:
-    score: 0.5
-    status: approx
-    sources:
-      wikidata_country_qid: Q874
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q1152752
-          name: Democratic Party of Turkmenistan
-          position_score: 0.5
-          weight: 1
-      explanation: Democratic Party of Turkmenistan (ideology-based)
-  SLE:
+  KIR:
     score: null
     status: unknown
     sources:
-      wikidata_country_qid: Q1044
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties: []
-      explanation: No governing party data available
-  PHL:
-    score: -0.6
-    status: approx
-    sources:
-      wikidata_country_qid: Q928
+      wikidata_country_qid: Q710
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q60749150
-          name: Partido Federal ng Pilipinas
-          position_score: -0.6
+        - qid: Q23058731
+          name: Tobwaan Kiribati Party
+          position_score: null
           weight: 1
-      explanation: Partido Federal ng Pilipinas (ideology-based)
+      explanation: Tobwaan Kiribati Party (unknown)
   ALB:
     score: -0.8
     status: ok
@@ -1968,102 +1991,32 @@ countries:
           position_score: -0.8
           weight: 1
       explanation: Socialist Party of Albania (alignment)
-  MCO:
+  SRB:
     score: null
     status: unknown
     sources:
-      wikidata_country_qid: Q235
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties: []
-      explanation: No governing party data available
-  NGA:
-    score: 0
-    status: approx
-    sources:
-      wikidata_country_qid: Q1033
+      wikidata_country_qid: Q403
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q343617
-          name: Action Congress of Nigeria
-          position_score: 0
+        - qid: Q327591
+          name: independent politician
+          position_score: null
           weight: 1
-      explanation: Action Congress of Nigeria (ideology-based)
-  KNA:
-    score: -0.4
-    status: ok
-    sources:
-      wikidata_country_qid: Q763
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q250738
-          name: Saint Kitts and Nevis Labour Party
-          position_score: -0.4
-          weight: 1
-      explanation: Saint Kitts and Nevis Labour Party (alignment)
-  CIV:
-    score: null
-    status: unknown
-    sources:
-      wikidata_country_qid: Q1008
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties: []
-      explanation: No governing party data available
-  MMR:
+      explanation: independent politician (unknown)
+  TKM:
     score: 0.5
     status: approx
     sources:
-      wikidata_country_qid: Q836
+      wikidata_country_qid: Q874
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q1318070
-          name: Union Solidarity and Development Party
+        - qid: Q1152752
+          name: Democratic Party of Turkmenistan
           position_score: 0.5
           weight: 1
-      explanation: Union Solidarity and Development Party (ideology-based)
-  CMR:
-    score: null
-    status: unknown
-    sources:
-      wikidata_country_qid: Q1009
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q953447
-          name: Cameroon People's Democratic Movement
-          position_score: null
-          weight: 1
-      explanation: Cameroon People's Democratic Movement (unknown)
-  GAB:
-    score: 0.4
-    status: ok
-    sources:
-      wikidata_country_qid: Q1000
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q1762536
-          name: Gabonese Democratic Party
-          position_score: 0.4
-          weight: 1
-      explanation: Gabonese Democratic Party (alignment)
-  MUS:
-    score: -0.6
-    status: approx
-    sources:
-      wikidata_country_qid: Q1027
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q6851928
-          name: Militant Socialist Movement
-          position_score: -0.6
-          weight: 1
-      explanation: Militant Socialist Movement (ideology-based)
+      explanation: Democratic Party of Turkmenistan (ideology-based)
   AFG:
     score: null
     status: unknown
@@ -2090,32 +2043,19 @@ countries:
           position_score: 0.8000000000000071
           weight: 1
       explanation: Republican Party (alignment)
-  HUN:
-    score: 0.7999999999999999
-    status: ok
+  EGY:
+    score: null
+    status: unknown
     sources:
-      wikidata_country_qid: Q28
+      wikidata_country_qid: Q79
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q387006
-          name: Fidesz
-          position_score: 0.7999999999999999
+        - qid: Q327591
+          name: independent politician
+          position_score: null
           weight: 1
-      explanation: Fidesz (alignment)
-  TLS:
-    score: -0.7000000000000001
-    status: approx
-    sources:
-      wikidata_country_qid: Q574
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q935996
-          name: Revolutionary Front for an Independent East Timor
-          position_score: -0.7000000000000001
-          weight: 1
-      explanation: Revolutionary Front for an Independent East Timor (ideology-based)
+      explanation: independent politician (unknown)
   NZL:
     score: 0.4
     status: ok
@@ -2138,10 +2078,41 @@ countries:
     government:
       parties:
         - qid: Q327591
-          name: Independent politician
+          name: independent politician
           position_score: null
           weight: 1
-      explanation: Independent politician (unknown)
+      explanation: independent politician (unknown)
+  HTI:
+    score: null
+    status: unknown
+    sources:
+      wikidata_country_qid: Q790
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties: []
+      explanation: No governing party data available
+  SLE:
+    score: null
+    status: unknown
+    sources:
+      wikidata_country_qid: Q1044
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties: []
+      explanation: No governing party data available
+  CMR:
+    score: null
+    status: unknown
+    sources:
+      wikidata_country_qid: Q1009
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q953447
+          name: Cameroon People's Democratic Movement
+          position_score: null
+          weight: 1
+      explanation: Cameroon People's Democratic Movement (unknown)
   UGA:
     score: 0.25
     status: approx
@@ -2155,28 +2126,6 @@ countries:
           position_score: 0.25
           weight: 1
       explanation: National Resistance Movement (ideology-based)
-  HTI:
-    score: null
-    status: unknown
-    sources:
-      wikidata_country_qid: Q790
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties: []
-      explanation: No governing party data available
-  PER:
-    score: -0.6000000000000001
-    status: ok
-    sources:
-      wikidata_country_qid: Q419
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties:
-        - qid: Q4732394
-          name: Alliance for Progress
-          position_score: -0.6000000000000001
-          weight: 1
-      explanation: Alliance for Progress (alignment)
   TGO:
     score: 0.8
     status: ok
@@ -2190,6 +2139,58 @@ countries:
           position_score: 0.8
           weight: 1
       explanation: Rally of the Togolese People (alignment)
+  ARG:
+    score: 0.8000000000000002
+    status: ok
+    sources:
+      wikidata_country_qid: Q414
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q105099519
+          name: Avanza Libertad
+          position_score: 0.8000000000000002
+          weight: 1
+      explanation: Avanza Libertad (alignment)
+  PER:
+    score: -0.7999999999999999
+    status: ok
+    sources:
+      wikidata_country_qid: Q419
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q102333715
+          name: Free Peru
+          position_score: -0.7999999999999999
+          weight: 1
+      explanation: Free Peru (alignment)
+  HUN:
+    score: 0.7999999999999999
+    status: ok
+    sources:
+      wikidata_country_qid: Q28
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q387006
+          name: Fidesz
+          position_score: 0.7999999999999999
+          weight: 1
+      explanation: Fidesz (alignment)
+  GAB:
+    score: 0.4
+    status: ok
+    sources:
+      wikidata_country_qid: Q1000
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties:
+        - qid: Q1762536
+          name: Gabonese Democratic Party
+          position_score: 0.4
+          weight: 1
+      explanation: Gabonese Democratic Party (alignment)
   SSD:
     score: null
     status: unknown
@@ -2229,42 +2230,6 @@ countries:
           position_score: 0.8000000000000002
           weight: 1
       explanation: Movimiento Sociedad Unida Más Acción (alignment)
-  SAU:
-    score: null
-    status: unknown
-    sources:
-      wikidata_country_qid: Q851
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties: []
-      explanation: No governing party data available
-  SLB:
-    score: null
-    status: unknown
-    sources:
-      wikidata_country_qid: Q685
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties: []
-      explanation: No governing party data available
-  TUV:
-    score: null
-    status: unknown
-    sources:
-      wikidata_country_qid: Q672
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties: []
-      explanation: No governing party data available
-  OMN:
-    score: null
-    status: unknown
-    sources:
-      wikidata_country_qid: Q842
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties: []
-      explanation: No governing party data available
   LSO:
     score: null
     status: unknown
@@ -2278,28 +2243,19 @@ countries:
           position_score: null
           weight: 1
       explanation: Revolution for Prosperity (unknown)
-  STP:
-    score: null
-    status: unknown
+  TLS:
+    score: -0.7000000000000001
+    status: approx
     sources:
-      wikidata_country_qid: Q1039
-      sparql_query_url: https://query.wikidata.org/sparql
-    government:
-      parties: []
-      explanation: No governing party data available
-  COM:
-    score: -0.4
-    status: ok
-    sources:
-      wikidata_country_qid: Q970
+      wikidata_country_qid: Q574
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties:
-        - qid: Q5166253
-          name: Convention for the Renewal of the Comoros
-          position_score: -0.4
+        - qid: Q935996
+          name: Revolutionary Front for an Independent East Timor
+          position_score: -0.7000000000000001
           weight: 1
-      explanation: Convention for the Renewal of the Comoros (alignment)
+      explanation: Revolutionary Front for an Independent East Timor (ideology-based)
   VAT:
     score: null
     status: unknown
@@ -2336,6 +2292,15 @@ countries:
     government:
       parties: []
       explanation: No governing party data available
+  SAU:
+    score: null
+    status: unknown
+    sources:
+      wikidata_country_qid: Q851
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties: []
+      explanation: No governing party data available
   BRN:
     score: null
     status: unknown
@@ -2359,6 +2324,33 @@ countries:
     status: unknown
     sources:
       wikidata_country_qid: Q398
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties: []
+      explanation: No governing party data available
+  SLB:
+    score: null
+    status: unknown
+    sources:
+      wikidata_country_qid: Q685
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties: []
+      explanation: No governing party data available
+  TUV:
+    score: null
+    status: unknown
+    sources:
+      wikidata_country_qid: Q672
+      sparql_query_url: https://query.wikidata.org/sparql
+    government:
+      parties: []
+      explanation: No governing party data available
+  OMN:
+    score: null
+    status: unknown
+    sources:
+      wikidata_country_qid: Q842
       sparql_query_url: https://query.wikidata.org/sparql
     government:
       parties: []
