@@ -14,9 +14,11 @@ of state).
 
 Run the comparison script below, then apply these judgments:
 
-1. **Coverage** — baseline as of 2026-07: **103 ok / 33 approx / 39 unknown** of 175.
-   Coverage should stay flat or improve. More than ~5 countries dropping out of `ok` or
-   into `unknown` is a regression: find out why before committing.
+1. **Coverage** — baseline as of 2026-07 (post phase 1): **96 ok / 26 approx /
+   76 unknown** of 198. Coverage should stay flat or improve. More than ~5 countries
+   dropping out of `ok` or into `unknown` is a regression: find out why before
+   committing. (An `unknown` caused by correctly rejecting a stale statement is fine —
+   the point is that every drop must be explainable.)
 2. **Swings** — per-country score change `|Δ| > 0.5` must be individually explainable
    (an actual election/government change, an override, a mapping fix). One or two
    explainable swings are normal; many at once means the query changed semantics.
