@@ -25,15 +25,34 @@ Country → Head of Government → Political Party → Political Alignment / Ide
 
 ### SPARQL Query Strategy
 
-We use Wikidata's SPARQL endpoint to query:
+We first query the full universe of **sovereign states** (P31: instance of →
+Q3624078: sovereign state) with an ISO 3166-1 alpha-3 code (P298), so every
+country appears in the output even when no government data is available
+(status `unknown`).
 
-1. **Sovereign states** (P31: instance of → Q3624078: sovereign state)
-2. Their **head of government** (P6) with time qualifiers
-3. The head of government's **political party membership** (P102) with time qualifiers
-4. The party's **political alignment** (P1387) - preferred source
-5. The party's **political ideology** (P1142) - fallback source
+Governing parties are then resolved with three strategies, in priority order:
 
-Time qualifiers help us identify the *current* head of government and their *current* party affiliation.
+1. **Head of government** (P6) — the primary strategy.
+2. **Head of state** (P35) — used *only* for countries that have no head of
+   government in Wikidata at all. This gate prevents scoring a ceremonial
+   president's party in parliamentary systems. Results from this strategy are
+   always capped at status `approx`.
+3. **Collective executive body** (P208 → P527 → current position holders via
+   P39) — for countries like Switzerland whose executive is a council rather
+   than a single person. Each current member contributes equally to the
+   government score, so parties are weighted by their number of members.
+
+All officeholder and party-membership statements are restricted to
+**best-rank statements without an end date** (qualifier P582), and persons
+with a date of death (P570) are excluded. This ensures only *current*
+officeholders and their *current* party memberships are counted — a former
+party of a sitting leader, or a former officeholder whose statement was never
+closed, cannot leak into the scores.
+
+From each governing party we read **political alignment** (P1387, preferred
+source) and **political ideology** (P1142, fallback source). The strategy that
+produced each country's score is recorded in `sources.strategy` in
+`data/leanings.yaml`.
 
 ## Scoring Model
 
@@ -86,10 +105,12 @@ We use substring matching on ideology labels (case-insensitive) with conservativ
 #### Single-party government
 Use that party's score directly.
 
-#### Coalition government
-*(Future enhancement - currently not fully implemented)*
-
-Compute weighted average of coalition parties' scores. Default to equal weights unless seat share data is available.
+#### Multiple parties
+Each selected person (one head of government, or every member of a collective
+executive) contributes one unit of weight, split equally across their current
+parties. The government score is the weight-averaged score of all scored
+parties (unscored parties are excluded and weights renormalized). Seat-share
+weighting for parliamentary coalitions is a future enhancement.
 
 ### Step 3: Status Flag
 
@@ -106,7 +127,9 @@ Each country receives a status indicating confidence level:
 Countries with no meaningful party competition (e.g., China, Cuba, North Korea) often can't be meaningfully placed on a Western left-right spectrum. These are typically marked as `unknown`.
 
 ### Presidential systems with ceremonial heads of government
-We attempt to use head of government (prime minister) rather than head of state (president) where they differ. This can fail in ambiguous systems.
+We use the head of government (P6) whenever Wikidata has one; the head of
+state (P35) is consulted only when no head of government exists at all, and
+such results are always marked `approx`.
 
 ### Recent government changes
 Wikidata may lag behind recent elections. Manual overrides can be added to `data/overrides.yaml`.
@@ -125,7 +148,7 @@ Overrides completely replace the automated result for a given country.
 
 ## Known Limitations
 
-1. **Coalition complexity**: We don't yet handle coalitions with seat-share weighting; we use simple head of government party only.
+1. **Coalition complexity**: Parliamentary coalitions are represented only by the head of government's party; seat-share weighting is not yet implemented. (Collective executives like Switzerland's Federal Council *are* weighted by member count.)
 
 2. **Subnational variation**: Federal systems with powerful subnational governments (e.g., USA, Germany) have their national government scored, ignoring state/provincial variation.
 
@@ -172,4 +195,4 @@ This will re-query Wikidata and regenerate all data files.
 
 ---
 
-**Last updated**: 2026-01-15
+**Last updated**: 2026-07-04

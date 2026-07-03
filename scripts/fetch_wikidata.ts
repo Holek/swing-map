@@ -27,48 +27,82 @@ const ideologyMappingData: any = yaml.load(
 
 const ideologyRules = ideologyMappingData.ideology_label_rules;
 
-// SPARQL Query: Multi-strategy approach to find governing parties
-// Strategy 1: Head of Government → Party
-// Strategy 2: Head of State → Party (fallback for parliamentary systems)
-// Strategy 3: Executive Body Members → Parties (for collective executives like Switzerland)
-const QUERY_HOG = `
-SELECT DISTINCT
-  ?country ?countryLabel
-  ?iso3
-  ?person ?personLabel
-  ?party ?partyLabel
-  ?alignment ?alignmentLabel
-  ?ideology ?ideologyLabel
-  ?strategy
-WHERE {
+// Query 1: the country universe. Every sovereign state with an ISO3 code
+// appears in the output — countries with no usable government data get
+// status "unknown" instead of vanishing from the map.
+const QUERY_COUNTRIES = `
+SELECT DISTINCT ?country ?countryLabel ?iso3 WHERE {
   ?country wdt:P31/wdt:P279* wd:Q3624078.     # sovereign state
-  OPTIONAL { ?country wdt:P298 ?iso3. }       # ISO 3166-1 alpha-3
+  ?country wdt:P298 ?iso3.                    # ISO 3166-1 alpha-3
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+}
+`;
 
-  {
-    # Strategy 1: Head of Government → Party
-    ?country wdt:P6 ?person .
-    ?person wdt:P102 ?party .
-    BIND("head_of_government" AS ?strategy)
-  } UNION {
-    # Strategy 2: Head of State → Party (for parliamentary systems)
-    ?country wdt:P35 ?person .
-    ?person wdt:P102 ?party .
-    BIND("head_of_state" AS ?strategy)
-  } UNION {
-    # Strategy 3: Executive Body Members → Parties (for Switzerland, etc.)
-    ?country wdt:P208 ?executive .  # executive body
-    ?executive wdt:P527 ?person .   # has part (members)
-    ?person wdt:P102 ?party .
-    BIND("executive_member" AS ?strategy)
-  }
+// Governing-party queries, one per strategy (a single UNION query exceeds the
+// WDQS 60s timeout). Results are merged and joined to the country universe in
+// JS. All strategies share the same tail: current party memberships only —
+// best-rank statements without an end date (pq:P582) — so former officeholders
+// and former party memberships never leak into the results.
+function strategyQuery(officePattern: string): string {
+  return `
+SELECT DISTINCT ?country ?iso3 ?person ?party ?partyLabel ?alignment ?ideologyLabel WHERE {
+  ?country wdt:P31/wdt:P279* wd:Q3624078.     # sovereign state
+  ?country wdt:P298 ?iso3.                    # ISO 3166-1 alpha-3
+${officePattern}
 
-  # Get party alignment and ideology
+  # Current officeholders are alive; guards against historical officeholders
+  # whose statements are missing an end date
+  FILTER NOT EXISTS { ?person wdt:P570 ?dateOfDeath. }
+
+  # Current party memberships only
+  ?person p:P102 ?pmSt.
+  ?pmSt a wikibase:BestRank;
+        ps:P102 ?party.
+  FILTER NOT EXISTS { ?pmSt pq:P582 ?pmEnd. }
+
   OPTIONAL { ?party wdt:P1387 ?alignment. }  # political alignment
   OPTIONAL { ?party wdt:P1142 ?ideology. }   # political ideology
 
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
 }
 `;
+}
+
+const STRATEGY_QUERIES: Array<{ strategy: string; query: string }> = [
+  {
+    // Strategy 1: current head of government
+    strategy: "head_of_government",
+    query: strategyQuery(`
+  ?country p:P6 ?officeSt.
+  ?officeSt a wikibase:BestRank;
+            ps:P6 ?person.
+  FILTER NOT EXISTS { ?officeSt pq:P582 ?officeEnd. }`),
+  },
+  {
+    // Strategy 2: current head of state, gated to countries with no head of
+    // government at all (avoids scoring ceremonial presidents)
+    strategy: "head_of_state",
+    query: strategyQuery(`
+  ?country p:P35 ?officeSt.
+  ?officeSt a wikibase:BestRank;
+            ps:P35 ?person.
+  FILTER NOT EXISTS { ?officeSt pq:P582 ?officeEnd. }
+  FILTER NOT EXISTS { ?country wdt:P6 ?anyHog. }`),
+  },
+  {
+    // Strategy 3: collective executive bodies (Switzerland, etc.). P527 on
+    // the executive links to a *position* item (e.g. "Member of the Swiss
+    // Federal Council"), so current holders are resolved via P39.
+    strategy: "executive_member",
+    query: strategyQuery(`
+  ?country wdt:P208 ?executive.   # executive body
+  ?executive wdt:P527 ?part.      # has part (membership position)
+  ?person p:P39 ?posSt.
+  ?posSt a wikibase:BestRank;
+         ps:P39 ?part.
+  FILTER NOT EXISTS { ?posSt pq:P582 ?posEnd. }`),
+  },
+];
 
 interface SparqlRow {
   country: { value: string };
@@ -91,21 +125,26 @@ interface SparqlResponse {
   };
 }
 
-async function querySparql(query: string): Promise<SparqlResponse> {
+async function querySparql(query: string, retries = 2): Promise<SparqlResponse> {
   const url = `${WIKIDATA_ENDPOINT}?query=${encodeURIComponent(query)}&format=json`;
-  console.log("Querying Wikidata...");
 
-  const response = await fetch(url, {
-    headers: {
-      "User-Agent": "Political-Leanings-Map/1.0 (Educational project)",
-    },
-  });
+  for (let attempt = 0; ; attempt++) {
+    console.log(`Querying Wikidata...${attempt > 0 ? ` (retry ${attempt})` : ""}`);
+    const response = await fetch(url, {
+      headers: {
+        "User-Agent": "Political-Leanings-Map/1.0 (Educational project)",
+      },
+    });
 
-  if (!response.ok) {
-    throw new Error(`SPARQL query failed: ${response.statusText}`);
+    if (response.ok) {
+      return response.json();
+    }
+    if (attempt >= retries) {
+      throw new Error(`SPARQL query failed: ${response.statusText}`);
+    }
+    // WDQS occasionally times out under load; back off and retry
+    await new Promise((r) => setTimeout(r, 10_000 * (attempt + 1)));
   }
-
-  return response.json();
 }
 
 function extractQID(uri: string): string {
@@ -158,41 +197,79 @@ function computePartyScore(
   return { score: null, method: "none" };
 }
 
-function selectBestRows(rows: SparqlRow[]): SparqlRow[] {
-  if (rows.length === 0) return [];
+const STRATEGY_PRIORITY: Record<string, number> = {
+  head_of_government: 1,
+  head_of_state: 2,
+  executive_member: 3,
+};
 
-  // Priority order: head_of_government > head_of_state > executive_member
-  const strategyPriority = {
-    "head_of_government": 1,
-    "head_of_state": 2,
-    "executive_member": 3,
-  };
+interface GovernmentSelection {
+  strategy: string;
+  // Unique persons and their current parties, both sorted for determinism
+  members: Array<{ person: string; parties: string[] }>;
+}
 
-  // Sort by strategy priority
-  rows.sort((a, b) => {
-    const aPriority = strategyPriority[a.strategy?.value as keyof typeof strategyPriority] || 999;
-    const bPriority = strategyPriority[b.strategy?.value as keyof typeof strategyPriority] || 999;
-    return aPriority - bPriority;
-  });
+function selectGovernment(rows: SparqlRow[]): GovernmentSelection | null {
+  const usable = rows.filter((r) => r.person && r.party && r.strategy);
+  if (usable.length === 0) return null;
 
-  const bestStrategy = rows[0].strategy?.value;
+  const strategies = [...new Set(usable.map((r) => r.strategy!.value))].sort(
+    (a, b) =>
+      (STRATEGY_PRIORITY[a] ?? 999) - (STRATEGY_PRIORITY[b] ?? 999) ||
+      a.localeCompare(b)
+  );
+  const strategy = strategies[0];
 
-  // For executive_member strategy (Switzerland), return all members
-  if (bestStrategy === "executive_member") {
-    return rows.filter(r => r.strategy?.value === "executive_member" && r.party);
+  const byPerson = new Map<string, Set<string>>();
+  for (const row of usable) {
+    if (row.strategy!.value !== strategy) continue;
+    if (!byPerson.has(row.person!.value)) byPerson.set(row.person!.value, new Set());
+    byPerson.get(row.person!.value)!.add(row.party!.value);
   }
 
-  // For other strategies, return just the best one
-  return rows.slice(0, 1);
+  let members = [...byPerson.entries()]
+    .map(([person, parties]) => ({ person, parties: [...parties].sort() }))
+    .sort((a, b) => a.person.localeCompare(b.person));
+
+  // A single office (HoG/HoS) should yield one person. If Wikidata carries
+  // several open-ended statements, pick one deterministically rather than
+  // depending on result order.
+  if (strategy !== "executive_member") {
+    members = members.slice(0, 1);
+  }
+
+  return { strategy, members };
 }
 
 async function fetchPoliticalLeanings() {
-  const response = await querySparql(QUERY_HOG);
-  const rows = response.results.bindings;
+  const universeResponse = await querySparql(QUERY_COUNTRIES);
 
-  console.log(`Received ${rows.length} rows from Wikidata`);
+  const rows: SparqlRow[] = [];
+  for (const { strategy, query } of STRATEGY_QUERIES) {
+    await new Promise((r) => setTimeout(r, 1000)); // be polite to WDQS
+    const resp = await querySparql(query);
+    console.log(`  ${strategy}: ${resp.results.bindings.length} rows`);
+    for (const row of resp.results.bindings) {
+      rows.push({ ...row, strategy: { value: strategy } });
+    }
+  }
 
-  // Group by country
+  // ISO3 → country entity. If several entities share a code (e.g. a state and
+  // its historical predecessor), keep the lowest URI for determinism.
+  const universe = new Map<string, { qid: string; uri: string }>();
+  for (const row of universeResponse.results.bindings) {
+    if (!row.iso3) continue;
+    const iso3 = row.iso3.value;
+    const existing = universe.get(iso3);
+    if (!existing || row.country.value < existing.uri) {
+      universe.set(iso3, { qid: extractQID(row.country.value), uri: row.country.value });
+    }
+  }
+
+  console.log(`Country universe: ${universe.size} sovereign states with ISO3`);
+  console.log(`Received ${rows.length} governing-party rows from Wikidata`);
+
+  // Group party rows by country
   const byCountry = new Map<string, SparqlRow[]>();
   for (const row of rows) {
     if (!row.iso3) continue; // Skip countries without ISO3
@@ -203,19 +280,20 @@ async function fetchPoliticalLeanings() {
     byCountry.get(iso3)!.push(row);
   }
 
-  console.log(`Grouped into ${byCountry.size} countries with ISO3 codes`);
-
   const countries: Record<string, any> = {};
 
-  for (const [iso3, countryRows] of byCountry.entries()) {
-    const bestRows = selectBestRows(countryRows);
+  for (const [iso3, countryInfo] of [...universe.entries()].sort((a, b) =>
+    a[0].localeCompare(b[0])
+  )) {
+    const countryRows = byCountry.get(iso3) ?? [];
+    const selection = selectGovernment(countryRows);
 
-    if (bestRows.length === 0 || !bestRows[0].party) {
+    if (!selection) {
       countries[iso3] = {
         score: null,
         status: "unknown",
         sources: {
-          wikidata_country_qid: extractQID(countryRows[0]?.country.value || ""),
+          wikidata_country_qid: countryInfo.qid,
           sparql_query_url: WIKIDATA_ENDPOINT,
         },
         government: {
@@ -226,51 +304,78 @@ async function fetchPoliticalLeanings() {
       continue;
     }
 
+    // Party weights: each selected person contributes 1 unit, split equally
+    // across their current parties. For a single HoG this is the old behavior;
+    // for collective executives parties are weighted by member count.
+    const partyWeights = new Map<string, number>();
+    for (const member of selection.members) {
+      for (const party of member.parties) {
+        partyWeights.set(
+          party,
+          (partyWeights.get(party) ?? 0) + 1 / member.parties.length
+        );
+      }
+    }
+    const totalWeight = selection.members.length;
+
     // Compute scores for each party
-    const partyScores: Array<{ party: string; partyLabel: string; score: number | null; method: string }> = [];
+    const partyScores: Array<{
+      party: string;
+      partyLabel: string;
+      score: number | null;
+      method: string;
+      weight: number;
+    }> = [];
 
-    for (const row of bestRows) {
-      if (!row.party) continue;
-
-      // Collect all alignment/ideology for this party
-      const partyRows = countryRows.filter(
-        (r) => r.party?.value === row.party?.value
-      );
-      const alignments = partyRows
-        .map((r) => r.alignment?.value)
-        .filter((a): a is string => !!a);
-      const ideologies = partyRows
-        .map((r) => r.ideologyLabel?.value)
-        .filter((i): i is string => !!i);
+    for (const [party, weight] of [...partyWeights.entries()].sort((a, b) =>
+      a[0].localeCompare(b[0])
+    )) {
+      // Collect all distinct alignment/ideology values for this party
+      const partyRows = countryRows.filter((r) => r.party?.value === party);
+      const alignments = [
+        ...new Set(
+          partyRows.map((r) => r.alignment?.value).filter((a): a is string => !!a)
+        ),
+      ];
+      const ideologies = [
+        ...new Set(
+          partyRows
+            .map((r) => r.ideologyLabel?.value)
+            .filter((i): i is string => !!i)
+        ),
+      ];
 
       const { score, method } = computePartyScore(alignments, ideologies);
-      const partyLabel = row.partyLabel?.value || "Unknown party";
+      const partyLabel = partyRows[0]?.partyLabel?.value || "Unknown party";
 
       partyScores.push({
-        party: row.party.value,
+        party,
         partyLabel,
         score,
         method,
+        weight: weight / totalWeight,
       });
     }
 
-    // Compute weighted average (for now, equal weights)
-    const validScores = partyScores.filter(p => p.score !== null) as Array<{ party: string; partyLabel: string; score: number; method: string }>;
+    const validScores = partyScores.filter(
+      (p) => p.score !== null
+    ) as Array<{ party: string; partyLabel: string; score: number; method: string; weight: number }>;
 
     if (validScores.length === 0) {
       countries[iso3] = {
         score: null,
         status: "unknown",
         sources: {
-          wikidata_country_qid: extractQID(bestRows[0].country.value),
+          wikidata_country_qid: countryInfo.qid,
           sparql_query_url: WIKIDATA_ENDPOINT,
+          strategy: selection.strategy,
         },
         government: {
           parties: partyScores.map(p => ({
             qid: extractQID(p.party),
             name: p.partyLabel,
             position_score: p.score,
-            weight: 1.0 / partyScores.length,
+            weight: p.weight,
           })),
           explanation: `${partyScores.map(p => p.partyLabel).join(", ")} (no alignment data)`,
         },
@@ -278,11 +383,22 @@ async function fetchPoliticalLeanings() {
       continue;
     }
 
-    const avgScore = validScores.reduce((sum, p) => sum + p.score, 0) / validScores.length;
+    // Weighted average over scored parties (weights renormalized so parties
+    // without a score don't drag the result toward zero)
+    const scoredWeight = validScores.reduce((sum, p) => sum + p.weight, 0);
+    const avgScore =
+      validScores.reduce((sum, p) => sum + p.score * p.weight, 0) / scoredWeight;
     const bestMethod = validScores.some(p => p.method === "alignment") ? "alignment" : "ideology";
-    const status = bestMethod === "alignment" ? "ok" : "approx";
 
-    const strategy = bestRows[0].strategy?.value || "unknown";
+    // Head-of-state inference is indirect (only used where no head of
+    // government exists) — never report it as high confidence.
+    const status =
+      selection.strategy === "head_of_state"
+        ? "approx"
+        : bestMethod === "alignment"
+          ? "ok"
+          : "approx";
+
     const partyNames = validScores.map(p => p.partyLabel).join(", ");
     const explanation = validScores.length === 1
       ? `${partyNames} (${bestMethod === "alignment" ? "alignment" : "ideology-based"})`
@@ -292,16 +408,16 @@ async function fetchPoliticalLeanings() {
       score: avgScore,
       status,
       sources: {
-        wikidata_country_qid: extractQID(bestRows[0].country.value),
+        wikidata_country_qid: extractQID(countryRows[0].country.value),
         sparql_query_url: WIKIDATA_ENDPOINT,
-        strategy,
+        strategy: selection.strategy,
       },
       government: {
         parties: validScores.map(p => ({
           qid: extractQID(p.party),
           name: p.partyLabel,
           position_score: p.score,
-          weight: 1.0 / validScores.length,
+          weight: p.weight,
         })),
         explanation,
       },

@@ -16,31 +16,38 @@ toward being the opposite of that, on three pillars:
 
 ## Current state (2026-07)
 
-- 175 countries scored: 103 `ok`, 33 `approx`, 39 `unknown`.
+- 198 countries in the data: 96 `ok`, 26 `approx`, 76 `unknown` (post-phase-1
+  baseline).
 - Frontend: single-snapshot choropleth with tooltip (party name + leaning label only).
-- Pending (uncommitted) work: multi-strategy SPARQL query
-  (head of government → head of state → executive-body members), which solves
-  Switzerland's collective Federal Council but **dropped the temporal qualifiers**
-  (P580/P582) the old query had — see Phase 1.
+- Multi-strategy SPARQL query (head of government → gated head of state →
+  executive-body members) landed with phase 1.
 
 ---
 
-## Phase 1 — Fix the multi-strategy query (prerequisite)
+## Phase 1 — Fix the multi-strategy query (prerequisite) ✅ (2026-07-04)
 
 The pending query rework is a good direction but currently a data-quality regression:
 
-- [ ] Reintroduce temporal qualifiers so only **current** officeholders and **current**
-      party memberships count. `wdt:P102` without time bounds can return a leader's
-      *former* party.
-- [ ] Gate the head-of-state fallback: only use it for executive presidencies, or at
-      minimum mark its results `approx`. A ceremonial president's party must not be
-      scored as the government's leaning.
-- [ ] Make row selection deterministic (`selectBestRows` currently sorts only by
-      strategy, then takes the first row — ties are arbitrary).
-- [ ] Keep the executive-members strategy (Switzerland), but average member scores as a
-      weighted coalition instead of picking one row.
-- [ ] Log which strategy produced each country's score; persist it into the data as the
-      `method`.
+- [x] Reintroduce temporal qualifiers so only **current** officeholders and **current**
+      party memberships count (best-rank statements without P582 end date, plus a
+      P570 date-of-death guard against never-closed statements).
+- [x] Gate the head-of-state fallback: only used when a country has no P6 at all, and
+      results are always capped at `approx`. (Fires for exactly 3 countries: BWA, SMR,
+      VEN.)
+- [x] Make row selection deterministic (`selectGovernment` sorts strategies, persons,
+      and parties; countries are processed in ISO3 order).
+- [x] Keep the executive-members strategy (Switzerland), averaging member scores as a
+      member-weighted coalition. P527 on the executive links to a *position* item, so
+      current holders are resolved via P39.
+- [x] Persist which strategy produced each country's score (`sources.strategy` in
+      `data/leanings.yaml`).
+
+Implementation notes: a single UNION query exceeds the WDQS 60s timeout, so the
+pipeline runs one cheap country-universe query (fixes countries vanishing from the
+output) plus one query per strategy, joined on ISO3 in JS. Coverage baseline moved
+from 92 ok / 31 approx / 70 unknown of 193 to **96 ok / 26 approx / 76 unknown of
+198** — slightly more unknowns because stale statements (e.g. Belarus scored via the
+CPSU) are now honestly rejected.
 
 ## Phase 2 — Honesty layer
 
