@@ -200,6 +200,8 @@ See [docs/methodology.md](docs/methodology.md) for detailed discussion of limita
 
 ## Future Enhancements
 
+See [ROADMAP.md](ROADMAP.md) for the current plan (time-travel history, honesty layer, Wikidata contribution loop).
+
 - **Time travel**: Store historical snapshots for temporal visualization
 - **Confidence layer**: Visual opacity based on data confidence
 - **Coalition weighting**: Proper multi-party coalition handling with seat shares
