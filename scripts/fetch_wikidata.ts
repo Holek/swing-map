@@ -27,37 +27,44 @@ const ideologyMappingData: any = yaml.load(
 
 const ideologyRules = ideologyMappingData.ideology_label_rules;
 
-// SPARQL Query A: Head of Government → Party → Alignment/Ideology
+// SPARQL Query: Multi-strategy approach to find governing parties
+// Strategy 1: Head of Government → Party
+// Strategy 2: Head of State → Party (fallback for parliamentary systems)
+// Strategy 3: Executive Body Members → Parties (for collective executives like Switzerland)
 const QUERY_HOG = `
-SELECT
+SELECT DISTINCT
   ?country ?countryLabel
   ?iso3
-  ?hog ?hogLabel
+  ?person ?personLabel
   ?party ?partyLabel
   ?alignment ?alignmentLabel
   ?ideology ?ideologyLabel
-  ?hogStatement ?hogStart ?hogEnd
-  ?partyStatement ?partyStart ?partyEnd
+  ?strategy
 WHERE {
   ?country wdt:P31/wdt:P279* wd:Q3624078.     # sovereign state
   OPTIONAL { ?country wdt:P298 ?iso3. }       # ISO 3166-1 alpha-3
 
-  # Head of government with qualifiers
-  ?country p:P6 ?hogStatement.
-  ?hogStatement ps:P6 ?hog.
-  OPTIONAL { ?hogStatement pq:P580 ?hogStart. }  # start time
-  OPTIONAL { ?hogStatement pq:P582 ?hogEnd. }    # end time
-
-  # Party membership statements on the HoG
-  OPTIONAL {
-    ?hog p:P102 ?partyStatement.
-    ?partyStatement ps:P102 ?party.
-    OPTIONAL { ?partyStatement pq:P580 ?partyStart. }
-    OPTIONAL { ?partyStatement pq:P582 ?partyEnd. }
-
-    OPTIONAL { ?party wdt:P1387 ?alignment. }  # political alignment
-    OPTIONAL { ?party wdt:P1142 ?ideology. }   # political ideology
+  {
+    # Strategy 1: Head of Government → Party
+    ?country wdt:P6 ?person .
+    ?person wdt:P102 ?party .
+    BIND("head_of_government" AS ?strategy)
+  } UNION {
+    # Strategy 2: Head of State → Party (for parliamentary systems)
+    ?country wdt:P35 ?person .
+    ?person wdt:P102 ?party .
+    BIND("head_of_state" AS ?strategy)
+  } UNION {
+    # Strategy 3: Executive Body Members → Parties (for Switzerland, etc.)
+    ?country wdt:P208 ?executive .  # executive body
+    ?executive wdt:P527 ?person .   # has part (members)
+    ?person wdt:P102 ?party .
+    BIND("executive_member" AS ?strategy)
   }
+
+  # Get party alignment and ideology
+  OPTIONAL { ?party wdt:P1387 ?alignment. }  # political alignment
+  OPTIONAL { ?party wdt:P1142 ?ideology. }   # political ideology
 
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
 }
@@ -67,18 +74,15 @@ interface SparqlRow {
   country: { value: string };
   countryLabel: { value: string };
   iso3?: { value: string };
-  hog?: { value: string };
-  hogLabel?: { value: string };
+  person?: { value: string };
+  personLabel?: { value: string };
   party?: { value: string };
   partyLabel?: { value: string };
   alignment?: { value: string };
   alignmentLabel?: { value: string };
   ideology?: { value: string };
   ideologyLabel?: { value: string };
-  hogStart?: { value: string };
-  hogEnd?: { value: string };
-  partyStart?: { value: string };
-  partyEnd?: { value: string };
+  strategy?: { value: string };
 }
 
 interface SparqlResponse {
@@ -154,27 +158,32 @@ function computePartyScore(
   return { score: null, method: "none" };
 }
 
-function selectCurrentHoG(rows: SparqlRow[]): SparqlRow | null {
-  if (rows.length === 0) return null;
+function selectBestRows(rows: SparqlRow[]): SparqlRow[] {
+  if (rows.length === 0) return [];
 
-  // Prefer HoG with no end date (current), else latest start
-  const noEnd = rows.filter((r) => !r.hogEnd);
-  if (noEnd.length > 0) {
-    noEnd.sort((a, b) => {
-      const aStart = a.hogStart?.value || "";
-      const bStart = b.hogStart?.value || "";
-      return bStart.localeCompare(aStart);
-    });
-    return noEnd[0];
+  // Priority order: head_of_government > head_of_state > executive_member
+  const strategyPriority = {
+    "head_of_government": 1,
+    "head_of_state": 2,
+    "executive_member": 3,
+  };
+
+  // Sort by strategy priority
+  rows.sort((a, b) => {
+    const aPriority = strategyPriority[a.strategy?.value as keyof typeof strategyPriority] || 999;
+    const bPriority = strategyPriority[b.strategy?.value as keyof typeof strategyPriority] || 999;
+    return aPriority - bPriority;
+  });
+
+  const bestStrategy = rows[0].strategy?.value;
+
+  // For executive_member strategy (Switzerland), return all members
+  if (bestStrategy === "executive_member") {
+    return rows.filter(r => r.strategy?.value === "executive_member" && r.party);
   }
 
-  // Else latest end date
-  rows.sort((a, b) => {
-    const aEnd = a.hogEnd?.value || "";
-    const bEnd = b.hogEnd?.value || "";
-    return bEnd.localeCompare(aEnd);
-  });
-  return rows[0];
+  // For other strategies, return just the best one
+  return rows.slice(0, 1);
 }
 
 async function fetchPoliticalLeanings() {
@@ -199,13 +208,14 @@ async function fetchPoliticalLeanings() {
   const countries: Record<string, any> = {};
 
   for (const [iso3, countryRows] of byCountry.entries()) {
-    const currentHoG = selectCurrentHoG(countryRows);
-    if (!currentHoG || !currentHoG.party) {
+    const bestRows = selectBestRows(countryRows);
+
+    if (bestRows.length === 0 || !bestRows[0].party) {
       countries[iso3] = {
         score: null,
         status: "unknown",
         sources: {
-          wikidata_country_qid: extractQID(currentHoG?.country.value || ""),
+          wikidata_country_qid: extractQID(countryRows[0]?.country.value || ""),
           sparql_query_url: WIKIDATA_ENDPOINT,
         },
         government: {
@@ -216,39 +226,84 @@ async function fetchPoliticalLeanings() {
       continue;
     }
 
-    // Collect all alignment/ideology for the party
-    const partyRows = countryRows.filter(
-      (r) => r.party?.value === currentHoG.party?.value
-    );
-    const alignments = partyRows
-      .map((r) => r.alignment?.value)
-      .filter((a): a is string => !!a);
-    const ideologies = partyRows
-      .map((r) => r.ideologyLabel?.value)
-      .filter((i): i is string => !!i);
+    // Compute scores for each party
+    const partyScores: Array<{ party: string; partyLabel: string; score: number | null; method: string }> = [];
 
-    const { score, method } = computePartyScore(alignments, ideologies);
+    for (const row of bestRows) {
+      if (!row.party) continue;
 
-    const partyLabel = currentHoG.partyLabel?.value || "Unknown party";
-    const status = method === "alignment" ? "ok" : method === "ideology" ? "approx" : "unknown";
+      // Collect all alignment/ideology for this party
+      const partyRows = countryRows.filter(
+        (r) => r.party?.value === row.party?.value
+      );
+      const alignments = partyRows
+        .map((r) => r.alignment?.value)
+        .filter((a): a is string => !!a);
+      const ideologies = partyRows
+        .map((r) => r.ideologyLabel?.value)
+        .filter((i): i is string => !!i);
+
+      const { score, method } = computePartyScore(alignments, ideologies);
+      const partyLabel = row.partyLabel?.value || "Unknown party";
+
+      partyScores.push({
+        party: row.party.value,
+        partyLabel,
+        score,
+        method,
+      });
+    }
+
+    // Compute weighted average (for now, equal weights)
+    const validScores = partyScores.filter(p => p.score !== null) as Array<{ party: string; partyLabel: string; score: number; method: string }>;
+
+    if (validScores.length === 0) {
+      countries[iso3] = {
+        score: null,
+        status: "unknown",
+        sources: {
+          wikidata_country_qid: extractQID(bestRows[0].country.value),
+          sparql_query_url: WIKIDATA_ENDPOINT,
+        },
+        government: {
+          parties: partyScores.map(p => ({
+            qid: extractQID(p.party),
+            name: p.partyLabel,
+            position_score: p.score,
+            weight: 1.0 / partyScores.length,
+          })),
+          explanation: `${partyScores.map(p => p.partyLabel).join(", ")} (no alignment data)`,
+        },
+      };
+      continue;
+    }
+
+    const avgScore = validScores.reduce((sum, p) => sum + p.score, 0) / validScores.length;
+    const bestMethod = validScores.some(p => p.method === "alignment") ? "alignment" : "ideology";
+    const status = bestMethod === "alignment" ? "ok" : "approx";
+
+    const strategy = bestRows[0].strategy?.value || "unknown";
+    const partyNames = validScores.map(p => p.partyLabel).join(", ");
+    const explanation = validScores.length === 1
+      ? `${partyNames} (${bestMethod === "alignment" ? "alignment" : "ideology-based"})`
+      : `Coalition: ${partyNames} (${bestMethod === "alignment" ? "alignment" : "ideology-based"})`;
 
     countries[iso3] = {
-      score,
+      score: avgScore,
       status,
       sources: {
-        wikidata_country_qid: extractQID(currentHoG.country.value),
+        wikidata_country_qid: extractQID(bestRows[0].country.value),
         sparql_query_url: WIKIDATA_ENDPOINT,
+        strategy,
       },
       government: {
-        parties: [
-          {
-            qid: extractQID(currentHoG.party.value),
-            name: partyLabel,
-            position_score: score,
-            weight: 1.0,
-          },
-        ],
-        explanation: `${partyLabel} (${method === "alignment" ? "alignment" : method === "ideology" ? "ideology-based" : "unknown"})`,
+        parties: validScores.map(p => ({
+          qid: extractQID(p.party),
+          name: p.partyLabel,
+          position_score: p.score,
+          weight: 1.0 / validScores.length,
+        })),
+        explanation,
       },
     };
   }
