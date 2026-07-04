@@ -1,0 +1,654 @@
+{
+  "date": "2023-01-01",
+  "source": "backfill",
+  "countries": {
+    "AGO": {
+      "score": -0.6000000000000001,
+      "status": "approx",
+      "party": "People's Movement for the Liberation of Angola",
+      "strategy": "head_of_government"
+    },
+    "AND": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "Democrats for Andorra",
+      "strategy": "head_of_government"
+    },
+    "ARM": {
+      "score": 0,
+      "status": "approx",
+      "party": "Civil Contract",
+      "strategy": "head_of_government"
+    },
+    "AUS": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Australian Labor Party",
+      "strategy": "head_of_government"
+    },
+    "AUT": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "Austrian People's Party",
+      "strategy": "head_of_government"
+    },
+    "AZE": {
+      "score": 0.3333333333333333,
+      "status": "approx",
+      "party": "New Azerbaijan Party",
+      "strategy": "head_of_government"
+    },
+    "BEL": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "Anders",
+      "strategy": "head_of_government"
+    },
+    "BGD": {
+      "score": 0,
+      "status": "approx",
+      "party": "Bangladesh Awami League",
+      "strategy": "head_of_government"
+    },
+    "BHS": {
+      "score": -0.3,
+      "status": "approx",
+      "party": "Progressive Liberal Party",
+      "strategy": "head_of_government"
+    },
+    "BIH": {
+      "score": 0.5,
+      "status": "approx",
+      "party": "Croatian Democratic Union of Bosnia and Herzegovina",
+      "strategy": "head_of_government"
+    },
+    "BLZ": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "People's United Party",
+      "strategy": "head_of_government"
+    },
+    "BRA": {
+      "score": -0.6,
+      "status": "approx",
+      "party": "Workers' Party",
+      "strategy": "head_of_government"
+    },
+    "BRB": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Barbados Labour Party",
+      "strategy": "head_of_government"
+    },
+    "CAN": {
+      "score": -0.2,
+      "status": "approx",
+      "party": "Liberal Party of Canada",
+      "strategy": "head_of_government"
+    },
+    "CHN": {
+      "score": -0.7000000000000001,
+      "status": "approx",
+      "party": "Chinese Communist Party",
+      "strategy": "head_of_government"
+    },
+    "CIV": {
+      "score": 0.2,
+      "status": "approx",
+      "party": "Rally of Houphouëtists for Democracy and Peace",
+      "strategy": "head_of_government"
+    },
+    "COD": {
+      "score": -0.6,
+      "status": "approx",
+      "party": "People's Party for Reconstruction and Democracy",
+      "strategy": "head_of_government"
+    },
+    "COG": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Congolese Party of Labour",
+      "strategy": "head_of_government"
+    },
+    "COL": {
+      "score": -0.6000000000000001,
+      "status": "approx",
+      "party": "Humane Colombia",
+      "strategy": "head_of_government"
+    },
+    "COM": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Convention for the Renewal of the Comoros",
+      "strategy": "head_of_government"
+    },
+    "CUB": {
+      "score": -0.9,
+      "status": "approx",
+      "party": "Communist Party of Cuba",
+      "strategy": "head_of_government"
+    },
+    "CZE": {
+      "score": 0.6000000000000001,
+      "status": "approx",
+      "party": "Civic Democratic Party",
+      "strategy": "head_of_government"
+    },
+    "DEU": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Social Democratic Party of Germany",
+      "strategy": "head_of_government"
+    },
+    "DMA": {
+      "score": -0.6,
+      "status": "approx",
+      "party": "Dominica Labour Party",
+      "strategy": "head_of_government"
+    },
+    "DNK": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Social Democrats",
+      "strategy": "head_of_government"
+    },
+    "DOM": {
+      "score": -0.2,
+      "status": "approx",
+      "party": "Modern Revolutionary Party",
+      "strategy": "head_of_government"
+    },
+    "ERI": {
+      "score": -0.75,
+      "status": "approx",
+      "party": "People's Front for Democracy and Justice",
+      "strategy": "head_of_government"
+    },
+    "ESP": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Spanish Socialist Workers' Party",
+      "strategy": "head_of_government"
+    },
+    "EST": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "Estonian Reform Party",
+      "strategy": "head_of_government"
+    },
+    "ETH": {
+      "score": -0.39999999999999997,
+      "status": "approx",
+      "party": "Ethiopian People's Revolutionary Democratic Front, Oromo Democratic Party, Prosperity Party",
+      "strategy": "head_of_government"
+    },
+    "FIN": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Social Democratic Party of Finland",
+      "strategy": "head_of_government"
+    },
+    "FJI": {
+      "score": 0.8,
+      "status": "approx",
+      "party": "Soqosoqo ni Vakavulewa ni Taukei",
+      "strategy": "head_of_government"
+    },
+    "FRA": {
+      "score": 0,
+      "status": "approx",
+      "party": "Renaissance",
+      "strategy": "head_of_government"
+    },
+    "GBR": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "Conservative Party",
+      "strategy": "head_of_government"
+    },
+    "GEO": {
+      "score": 0,
+      "status": "approx",
+      "party": "Georgian Dream",
+      "strategy": "head_of_government"
+    },
+    "GHA": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "New Patriotic Party",
+      "strategy": "head_of_government"
+    },
+    "GIB": {
+      "score": -0.6,
+      "status": "approx",
+      "party": "Gibraltar Socialist Labour Party",
+      "strategy": "head_of_government"
+    },
+    "GRC": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "New Democracy",
+      "strategy": "head_of_government"
+    },
+    "GRD": {
+      "score": 0,
+      "status": "approx",
+      "party": "National Democratic Congress",
+      "strategy": "head_of_government"
+    },
+    "GTM": {
+      "score": 0.6000000000000001,
+      "status": "approx",
+      "party": "Vamos",
+      "strategy": "head_of_government"
+    },
+    "GUY": {
+      "score": -0.9,
+      "status": "approx",
+      "party": "People's Progressive Party",
+      "strategy": "head_of_government"
+    },
+    "HND": {
+      "score": -0.9,
+      "status": "approx",
+      "party": "Liberty and Refoundation",
+      "strategy": "head_of_government"
+    },
+    "HRV": {
+      "score": 0.6000000000000001,
+      "status": "approx",
+      "party": "Croatian Democratic Union",
+      "strategy": "head_of_government"
+    },
+    "HUN": {
+      "score": 0.8,
+      "status": "approx",
+      "party": "Fidesz",
+      "strategy": "head_of_government"
+    },
+    "IND": {
+      "score": 0.8,
+      "status": "approx",
+      "party": "Bharatiya Janata Party",
+      "strategy": "head_of_government"
+    },
+    "IRL": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "Fine Gael",
+      "strategy": "head_of_government"
+    },
+    "IRN": {
+      "score": 0.8,
+      "status": "approx",
+      "party": "Combatant Clergy Association",
+      "strategy": "head_of_government"
+    },
+    "ISL": {
+      "score": -0.6000000000000001,
+      "status": "approx",
+      "party": "Left-Green Movement",
+      "strategy": "head_of_government"
+    },
+    "ISR": {
+      "score": 0.8,
+      "status": "approx",
+      "party": "Likud",
+      "strategy": "head_of_government"
+    },
+    "ITA": {
+      "score": 0.8,
+      "status": "approx",
+      "party": "Brothers of Italy",
+      "strategy": "head_of_government"
+    },
+    "JPN": {
+      "score": 0.8,
+      "status": "approx",
+      "party": "Liberal Democratic Party",
+      "strategy": "head_of_government"
+    },
+    "KAZ": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "Amanat",
+      "strategy": "head_of_government"
+    },
+    "KNA": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Saint Kitts and Nevis Labour Party",
+      "strategy": "head_of_government"
+    },
+    "LCA": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Saint Lucia Labour Party",
+      "strategy": "head_of_government"
+    },
+    "LIE": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "Fatherland Union",
+      "strategy": "head_of_government"
+    },
+    "LTU": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "Homeland Union – Lithuanian Christian Democrats",
+      "strategy": "head_of_government"
+    },
+    "LUX": {
+      "score": 0,
+      "status": "approx",
+      "party": "Democratic Party",
+      "strategy": "head_of_government"
+    },
+    "LVA": {
+      "score": 0.45,
+      "status": "approx",
+      "party": "New Era Party, Unity",
+      "strategy": "head_of_government"
+    },
+    "MAR": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "National Rally of Independents",
+      "strategy": "head_of_government"
+    },
+    "MDA": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "Party of Action and Solidarity",
+      "strategy": "head_of_government"
+    },
+    "MDV": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "Maldivian Democratic Party",
+      "strategy": "head_of_government"
+    },
+    "MKD": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Social Democratic Union of Macedonia",
+      "strategy": "head_of_government"
+    },
+    "MLT": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Labour Party",
+      "strategy": "head_of_government"
+    },
+    "MMR": {
+      "score": 0.5,
+      "status": "approx",
+      "party": "Union Solidarity and Development Party",
+      "strategy": "head_of_government"
+    },
+    "MNE": {
+      "score": -0.2,
+      "status": "approx",
+      "party": "United Reform Action",
+      "strategy": "head_of_government"
+    },
+    "MNG": {
+      "score": -0.6000000000000001,
+      "status": "approx",
+      "party": "Mongolian People's Party",
+      "strategy": "head_of_government"
+    },
+    "MOZ": {
+      "score": -0.8,
+      "status": "approx",
+      "party": "FRELIMO",
+      "strategy": "head_of_government"
+    },
+    "MRT": {
+      "score": 0,
+      "status": "approx",
+      "party": "Union for the Republic",
+      "strategy": "head_of_government"
+    },
+    "MUS": {
+      "score": -0.6,
+      "status": "approx",
+      "party": "Militant Socialist Movement",
+      "strategy": "head_of_government"
+    },
+    "MYS": {
+      "score": -0.2,
+      "status": "approx",
+      "party": "People's Justice Party",
+      "strategy": "head_of_government"
+    },
+    "NAM": {
+      "score": -0.6000000000000001,
+      "status": "approx",
+      "party": "SWAPO Party",
+      "strategy": "head_of_government"
+    },
+    "NER": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Nigerien Party for Democracy and Socialism",
+      "strategy": "head_of_government"
+    },
+    "NIC": {
+      "score": -0.8,
+      "status": "approx",
+      "party": "Sandinista National Liberation Front",
+      "strategy": "head_of_government"
+    },
+    "NLD": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "People's Party for Freedom and Democracy",
+      "strategy": "head_of_government"
+    },
+    "NOR": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Norwegian Labour Party",
+      "strategy": "head_of_government"
+    },
+    "NPL": {
+      "score": -0.9,
+      "status": "approx",
+      "party": "Communist Party of Nepal (Maoist Centre)",
+      "strategy": "head_of_government"
+    },
+    "PAK": {
+      "score": 0.25,
+      "status": "approx",
+      "party": "Pakistan Muslim League (N)",
+      "strategy": "head_of_government"
+    },
+    "PAN": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Democratic Revolutionary Party",
+      "strategy": "head_of_government"
+    },
+    "PHL": {
+      "score": -0.6,
+      "status": "approx",
+      "party": "Partido Federal ng Pilipinas",
+      "strategy": "head_of_government"
+    },
+    "PNG": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Pangu Party",
+      "strategy": "head_of_government"
+    },
+    "POL": {
+      "score": 0.8,
+      "status": "approx",
+      "party": "Law and Justice",
+      "strategy": "head_of_government"
+    },
+    "PRK": {
+      "score": -1,
+      "status": "approx",
+      "party": "Workers’ Party of Korea",
+      "strategy": "head_of_government"
+    },
+    "PRT": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Socialist Party",
+      "strategy": "head_of_government"
+    },
+    "PSE": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Fatah",
+      "strategy": "head_of_government"
+    },
+    "ROU": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "National Liberal Party",
+      "strategy": "head_of_government"
+    },
+    "SEN": {
+      "score": 0,
+      "status": "approx",
+      "party": "Senegalese Democratic Party, Alliance for the Republic",
+      "strategy": "head_of_government"
+    },
+    "SGP": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "People's Action Party",
+      "strategy": "head_of_government"
+    },
+    "SLV": {
+      "score": 0.35,
+      "status": "approx",
+      "party": "Grand Alliance for National Unity, Nuevas Ideas",
+      "strategy": "head_of_government"
+    },
+    "STP": {
+      "score": 0.5,
+      "status": "approx",
+      "party": "Independent Democratic Action",
+      "strategy": "head_of_government"
+    },
+    "SVK": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "Democrats",
+      "strategy": "head_of_government"
+    },
+    "SVN": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Freedom Movement",
+      "strategy": "head_of_government"
+    },
+    "SWE": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "Moderate Party",
+      "strategy": "head_of_government"
+    },
+    "SYC": {
+      "score": 0,
+      "status": "approx",
+      "party": "Seychelles National Party",
+      "strategy": "head_of_government"
+    },
+    "TJK": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "People's Democratic Party of Tajikistan",
+      "strategy": "head_of_government"
+    },
+    "TKM": {
+      "score": 0.5,
+      "status": "approx",
+      "party": "Democratic Party of Turkmenistan",
+      "strategy": "head_of_government"
+    },
+    "TLS": {
+      "score": -0.55,
+      "status": "approx",
+      "party": "National Congress for Timorese Reconstruction, Revolutionary Front for an Independent East Timor",
+      "strategy": "head_of_government"
+    },
+    "TTO": {
+      "score": -0.2,
+      "status": "approx",
+      "party": "People's National Movement",
+      "strategy": "head_of_government"
+    },
+    "TUR": {
+      "score": 0.8,
+      "status": "approx",
+      "party": "Justice and Development Party",
+      "strategy": "head_of_government"
+    },
+    "TWN": {
+      "score": -0.2,
+      "status": "approx",
+      "party": "Democratic Progressive Party",
+      "strategy": "head_of_government"
+    },
+    "UGA": {
+      "score": 0.25,
+      "status": "approx",
+      "party": "National Resistance Movement",
+      "strategy": "head_of_government"
+    },
+    "USA": {
+      "score": 0,
+      "status": "approx",
+      "party": "Democratic Party",
+      "strategy": "head_of_government"
+    },
+    "UZB": {
+      "score": 0.2,
+      "status": "approx",
+      "party": "Uzbekistan Liberal Democratic Party",
+      "strategy": "head_of_government"
+    },
+    "VNM": {
+      "score": -0.8,
+      "status": "approx",
+      "party": "Communist Party of Vietnam",
+      "strategy": "head_of_government"
+    },
+    "VUT": {
+      "score": -0.8,
+      "status": "approx",
+      "party": "Vanua'aku Pati",
+      "strategy": "head_of_government"
+    },
+    "XKS": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Vetëvendosje!",
+      "strategy": "head_of_government"
+    },
+    "YEM": {
+      "score": 0,
+      "status": "approx",
+      "party": "General People's Congress",
+      "strategy": "head_of_government"
+    },
+    "ZAF": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "African National Congress",
+      "strategy": "head_of_government"
+    },
+    "ZWE": {
+      "score": -0.7666666666666666,
+      "status": "approx",
+      "party": "United National Independence Party, Zimbabwe African National Union – Patriotic Front, Zimbabwe African People's Union",
+      "strategy": "head_of_government"
+    }
+  }
+}

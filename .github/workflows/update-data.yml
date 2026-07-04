@@ -60,6 +60,8 @@ jobs:
             ### Changes
             - Updated `data/leanings.yaml` with latest government data
             - Updated `public/data/leanings.min.json` for frontend consumption
+            - Appended a snapshot to `data/history/` and rebuilt
+              `public/data/history.min.json` (append-only; only when content changed)
 
             ### Review Checklist
             - [ ] Check that scores are reasonable

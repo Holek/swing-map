@@ -1,0 +1,48 @@
+{
+  "date": "1946-01-01",
+  "source": "backfill",
+  "countries": {
+    "AUS": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Australian Labor Party",
+      "strategy": "head_of_government"
+    },
+    "CAN": {
+      "score": -0.2,
+      "status": "approx",
+      "party": "Liberal Party of Canada",
+      "strategy": "head_of_government"
+    },
+    "DNK": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "Venstre",
+      "strategy": "head_of_government"
+    },
+    "GBR": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Labour Party",
+      "strategy": "head_of_government"
+    },
+    "NOR": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Norwegian Labour Party",
+      "strategy": "head_of_government"
+    },
+    "ROU": {
+      "score": -0.15000000000000002,
+      "status": "approx",
+      "party": "Ploughmen's Front, Romanian National Party",
+      "strategy": "head_of_government"
+    },
+    "USA": {
+      "score": 0,
+      "status": "approx",
+      "party": "Democratic Party",
+      "strategy": "head_of_government"
+    }
+  }
+}

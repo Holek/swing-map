@@ -9,23 +9,16 @@ import * as path from "path";
 import * as yaml from "js-yaml";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import { WIKIDATA_ENDPOINT, querySparql, extractQID, sleep } from "./lib/wdqs";
+import { computePartyScore } from "./lib/scoring";
+import {
+  appendSnapshotIfChanged,
+  buildHistoryMin,
+  snapshotCountriesFrom,
+} from "./lib/history";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
-const WIKIDATA_ENDPOINT = "https://query.wikidata.org/sparql";
-
-// Load alignment mapping
-const alignmentMapping: Record<string, number> = yaml.load(
-  fs.readFileSync(path.join(__dirname, "mappings/alignment.yaml"), "utf8")
-) as any;
-
-// Load ideology mapping
-const ideologyMappingData: any = yaml.load(
-  fs.readFileSync(path.join(__dirname, "mappings/ideology.yaml"), "utf8")
-);
-
-const ideologyRules = ideologyMappingData.ideology_label_rules;
 
 // Query 1: the country universe. Every sovereign state with an ISO3 code
 // appears in the output — countries with no usable government data get
@@ -125,78 +118,6 @@ interface SparqlResponse {
   };
 }
 
-async function querySparql(query: string, retries = 2): Promise<SparqlResponse> {
-  const url = `${WIKIDATA_ENDPOINT}?query=${encodeURIComponent(query)}&format=json`;
-
-  for (let attempt = 0; ; attempt++) {
-    console.log(`Querying Wikidata...${attempt > 0 ? ` (retry ${attempt})` : ""}`);
-    const response = await fetch(url, {
-      headers: {
-        "User-Agent": "Political-Leanings-Map/1.0 (Educational project)",
-      },
-    });
-
-    if (response.ok) {
-      return response.json();
-    }
-    if (attempt >= retries) {
-      throw new Error(`SPARQL query failed: ${response.statusText}`);
-    }
-    // WDQS occasionally times out under load; back off and retry
-    await new Promise((r) => setTimeout(r, 10_000 * (attempt + 1)));
-  }
-}
-
-function extractQID(uri: string): string {
-  return uri.split("/").pop() || "";
-}
-
-function scoreFromAlignment(alignmentQID: string): number | null {
-  const mapping = alignmentMapping.alignment_qid_to_score;
-  return mapping[alignmentQID] ?? null;
-}
-
-function scoreFromIdeologyLabel(label: string): number | null {
-  const normalized = label.toLowerCase().trim();
-
-  for (const rule of ideologyRules) {
-    for (const match of rule.match) {
-      if (normalized.includes(match.toLowerCase())) {
-        return rule.score;
-      }
-    }
-  }
-
-  return null;
-}
-
-function computePartyScore(
-  alignments: string[],
-  ideologies: string[]
-): { score: number | null; method: string } {
-  // Try alignment first
-  const alignmentScores = alignments
-    .map((a) => scoreFromAlignment(extractQID(a)))
-    .filter((s): s is number => s !== null);
-
-  if (alignmentScores.length > 0) {
-    const avg = alignmentScores.reduce((a, b) => a + b, 0) / alignmentScores.length;
-    return { score: Math.max(-1, Math.min(1, avg)), method: "alignment" };
-  }
-
-  // Try ideology
-  const ideologyScores = ideologies
-    .map((i) => scoreFromIdeologyLabel(i))
-    .filter((s): s is number => s !== null);
-
-  if (ideologyScores.length > 0) {
-    const avg = ideologyScores.reduce((a, b) => a + b, 0) / ideologyScores.length;
-    return { score: Math.max(-1, Math.min(1, avg)), method: "ideology" };
-  }
-
-  return { score: null, method: "none" };
-}
-
 const STRATEGY_PRIORITY: Record<string, number> = {
   head_of_government: 1,
   head_of_state: 2,
@@ -242,12 +163,12 @@ function selectGovernment(rows: SparqlRow[]): GovernmentSelection | null {
 }
 
 async function fetchPoliticalLeanings() {
-  const universeResponse = await querySparql(QUERY_COUNTRIES);
+  const universeResponse = (await querySparql(QUERY_COUNTRIES)) as SparqlResponse;
 
   const rows: SparqlRow[] = [];
   for (const { strategy, query } of STRATEGY_QUERIES) {
-    await new Promise((r) => setTimeout(r, 1000)); // be polite to WDQS
-    const resp = await querySparql(query);
+    await sleep(1000); // be polite to WDQS
+    const resp = (await querySparql(query)) as SparqlResponse;
     console.log(`  ${strategy}: ${resp.results.bindings.length} rows`);
     for (const row of resp.results.bindings) {
       rows.push({ ...row, strategy: { value: strategy } });
@@ -471,6 +392,7 @@ async function main() {
             status: data.status,
             name: iso3, // Will be enriched from TopoJSON
             explanation: data.government?.explanation || "No data",
+            strategy: data.sources?.strategy,
           },
         ])
       ),
@@ -479,6 +401,21 @@ async function main() {
     const jsonPath = path.join(__dirname, "..", "public", "data", "leanings.min.json");
     fs.writeFileSync(jsonPath, JSON.stringify(minData, null, 2), "utf8");
     console.log(`Wrote compact JSON to ${jsonPath}`);
+
+    // Append-only history: record a snapshot when the data actually changed,
+    // then rebuild the aggregated frontend file (ROADMAP phase 3)
+    const snapshotDate = fullData.updated_at.slice(0, 10);
+    const appended = appendSnapshotIfChanged({
+      date: snapshotDate,
+      source: "live",
+      countries: snapshotCountriesFrom(countries),
+    });
+    const snapshotCount = buildHistoryMin();
+    console.log(
+      appended
+        ? `Appended history snapshot ${snapshotDate} (${snapshotCount} total)`
+        : `No content change — history unchanged (${snapshotCount} snapshots)`
+    );
 
     console.log(`\nProcessed ${Object.keys(countries).length} countries`);
     const withScores = Object.values(countries).filter(

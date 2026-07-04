@@ -1,0 +1,192 @@
+{
+  "date": "1993-01-01",
+  "source": "backfill",
+  "countries": {
+    "AUS": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Australian Labor Party",
+      "strategy": "head_of_government"
+    },
+    "AUT": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Social Democratic Party of Austria",
+      "strategy": "head_of_government"
+    },
+    "BHS": {
+      "score": 0,
+      "status": "approx",
+      "party": "Free National Movement",
+      "strategy": "head_of_government"
+    },
+    "BLZ": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "People's United Party",
+      "strategy": "head_of_government"
+    },
+    "CAN": {
+      "score": 0.8,
+      "status": "approx",
+      "party": "Progressive Conservative Party of Canada, Conservative Party of Canada",
+      "strategy": "head_of_government"
+    },
+    "CHN": {
+      "score": -0.7000000000000001,
+      "status": "approx",
+      "party": "Chinese Communist Party",
+      "strategy": "head_of_government"
+    },
+    "CPV": {
+      "score": 0.2,
+      "status": "approx",
+      "party": "Movement for Democracy",
+      "strategy": "head_of_government"
+    },
+    "CZE": {
+      "score": 0.6000000000000001,
+      "status": "approx",
+      "party": "Civic Democratic Party",
+      "strategy": "head_of_government"
+    },
+    "DEU": {
+      "score": 0.2,
+      "status": "approx",
+      "party": "Christian Democratic Union",
+      "strategy": "head_of_government"
+    },
+    "DMA": {
+      "score": 0.5,
+      "status": "approx",
+      "party": "Dominica Freedom Party",
+      "strategy": "head_of_government"
+    },
+    "DNK": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "Conservative People's Party",
+      "strategy": "head_of_government"
+    },
+    "ERI": {
+      "score": -0.75,
+      "status": "approx",
+      "party": "People's Front for Democracy and Justice",
+      "strategy": "head_of_government"
+    },
+    "ESP": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Spanish Socialist Workers' Party",
+      "strategy": "head_of_government"
+    },
+    "GBR": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "Conservative Party",
+      "strategy": "head_of_government"
+    },
+    "IND": {
+      "score": 0,
+      "status": "approx",
+      "party": "Indian National Congress",
+      "strategy": "head_of_government"
+    },
+    "IRN": {
+      "score": 0,
+      "status": "approx",
+      "party": "Executives of Construction Party",
+      "strategy": "head_of_government"
+    },
+    "ISR": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Israeli Labor Party",
+      "strategy": "head_of_government"
+    },
+    "ITA": {
+      "score": -0.5,
+      "status": "approx",
+      "party": "Democratic Party, Italian Socialist Party",
+      "strategy": "head_of_government"
+    },
+    "LUX": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "Christian Social People's Party",
+      "strategy": "head_of_government"
+    },
+    "MLT": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "Nationalist Party",
+      "strategy": "head_of_government"
+    },
+    "MNE": {
+      "score": -0.6000000000000001,
+      "status": "approx",
+      "party": "Democratic Party of Socialists of Montenegro",
+      "strategy": "head_of_government"
+    },
+    "MOZ": {
+      "score": -0.8,
+      "status": "approx",
+      "party": "FRELIMO",
+      "strategy": "head_of_government"
+    },
+    "MYS": {
+      "score": 0.8,
+      "status": "approx",
+      "party": "United Malays National Organisation",
+      "strategy": "head_of_government"
+    },
+    "NAM": {
+      "score": -0.6000000000000001,
+      "status": "approx",
+      "party": "SWAPO Party",
+      "strategy": "head_of_government"
+    },
+    "NIC": {
+      "score": 0.5,
+      "status": "approx",
+      "party": "National Opposition Union",
+      "strategy": "head_of_government"
+    },
+    "NOR": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Norwegian Labour Party",
+      "strategy": "head_of_government"
+    },
+    "POL": {
+      "score": 0.13333333333333333,
+      "status": "approx",
+      "party": "Democratic Union, Freedom Union, Democratic Party",
+      "strategy": "head_of_government"
+    },
+    "SWE": {
+      "score": 0.4,
+      "status": "approx",
+      "party": "Moderate Party",
+      "strategy": "head_of_government"
+    },
+    "USA": {
+      "score": 0.8,
+      "status": "approx",
+      "party": "Republican Party",
+      "strategy": "head_of_government"
+    },
+    "UZB": {
+      "score": -0.39583333333333337,
+      "status": "approx",
+      "party": "People's Democratic Party of Uzbekistan, Uzbekistan Liberal Democratic Party, Communist Party of Uzbekistan, Communist Party of the Soviet Union",
+      "strategy": "head_of_government"
+    },
+    "YEM": {
+      "score": -0.4,
+      "status": "approx",
+      "party": "Yemeni Socialist Party",
+      "strategy": "head_of_government"
+    }
+  }
+}

@@ -18,7 +18,12 @@ toward being the opposite of that, on three pillars:
 
 - 198 countries in the data: 96 `ok`, 26 `approx`, 76 `unknown` (post-phase-1
   baseline).
-- Frontend: single-snapshot choropleth with tooltip (party name + leaning label only).
+- Frontend: time-aware choropleth; `approx`/`unknown` rendered distinctly, tooltip
+  carries provenance (status, source strategy, method, snapshot date), methodology
+  linked from the legend. Timeline scrubber over 82 snapshots (1946–today) with a
+  changes-since-previous panel.
+- History: append-only `data/history/` archive — weekly live snapshots (on change)
+  plus yearly backfilled reconstructions from Wikidata office-holder records.
 - Multi-strategy SPARQL query (head of government → gated head of state →
   executive-body members) landed with phase 1.
 
@@ -49,23 +54,41 @@ from 92 ok / 31 approx / 70 unknown of 193 to **96 ok / 26 approx / 76 unknown o
 198** — slightly more unknowns because stale statements (e.g. Belarus scored via the
 CPSU) are now honestly rejected.
 
-## Phase 2 — Honesty layer
+## Phase 2 — Honesty layer ✅ (2026-07-04)
 
-- [ ] Restore confidence in the UI (the "simplify the tooltip" commit hid it): hatched
+- [x] Restore confidence in the UI (the "simplify the tooltip" commit hid it): hatched
       or desaturated fills for `approx`, clearly distinct rendering for `unknown`.
-- [ ] Tooltip provenance: scoring method, data status, last-updated date.
-- [ ] Link the methodology doc from the UI (one click away from the map).
+      (45° background-colored stripes over the score fill for `approx`; cross-hatched
+      neutral for `unknown` so it can't read as a score; both in the legend.)
+- [x] Tooltip provenance: scoring method, data status, last-updated date.
+      (Status chip + "Source: <strategy> · <method>" + snapshot date; the pipeline now
+      carries `sources.strategy` through to `leanings.min.json`.)
+- [x] Link the methodology doc from the UI (one click away from the map).
+      (Legend footer links to `docs/methodology.md` on GitHub.)
 
-## Phase 3 — History: the actual "swing"
+## Phase 3 — History: the actual "swing" ✅ (2026-07-04)
 
-- [ ] Append-only snapshot schema (e.g. `data/history/YYYY-MM-DD.json` or a single
+- [x] Append-only snapshot schema (e.g. `data/history/YYYY-MM-DD.json` or a single
       NDJSON file); the weekly GitHub Action appends instead of overwriting.
-- [ ] Timeline scrubber in the frontend to travel through snapshots.
-- [ ] "What changed this week" panel: highlight countries whose government leaning moved
+      (`data/history/YYYY-MM-DD.json`, scored countries only, appended by the fetch
+      script only when content changed — so the "no timestamp-only PRs" rule holds;
+      aggregated into `public/data/history.min.json` for the frontend.)
+- [x] Timeline scrubber in the frontend to travel through snapshots.
+      (Bottom-center slider, 1946 → today; historical views are labelled
+      "reconstructed" and keep the approx hatching + provenance tooltips.)
+- [x] "What changed this week" panel: highlight countries whose government leaning moved
       since the previous snapshot.
-- [ ] Historical backfill script: use Wikidata `position held` (P39) start/end
+      (Top-left panel comparing the viewed snapshot to the previous one — score or
+      governing-party changes count, status-only flips don't; changed countries are
+      outlined on the map.)
+- [x] Historical backfill script: use Wikidata `position held` (P39) start/end
       qualifiers to reconstruct past governments and their leanings — potentially
       decades of pendulum swings, which no free tool currently shows well.
+      (`scripts/backfill_history.ts`; went via country `p:P6` term qualifiers +
+      time-qualified `p:P102` memberships rather than person-side P39 — same
+      qualifiers, one hop shorter. 81 yearly snapshots 1946–2026, 7→112 countries,
+      all capped at `approx` since today's party alignments are projected onto the
+      past. See methodology "History Snapshots and Backfill".)
 
 ## Phase 4 — Commons contribution loop
 
