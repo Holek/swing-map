@@ -30,8 +30,9 @@ jobs:
 
       - name: Check for changes
         id: check_changes
+        # -I ignores the updated_at timestamp, which changes on every run
         run: |
-          if git diff --quiet data/leanings.yaml public/data/leanings.min.json; then
+          if git diff --quiet -I updated_at data/leanings.yaml public/data/leanings.min.json; then
             echo "has_changes=false" >> $GITHUB_OUTPUT
             echo "No changes detected"
           else
