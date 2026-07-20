@@ -1,4 +1,4 @@
-updated_at: '2026-07-03T23:11:05.642Z'
+updated_at: '2026-07-20T03:34:24.743Z'
 model:
   scale: '-1..+1'
   method: party-weighted average
@@ -220,8 +220,8 @@ countries:
           weight: 1
       explanation: Bangladesh Nationalist Party (no alignment data)
   BGR:
-    score: -0.04999999999999999
-    status: approx
+    score: null
+    status: unknown
     sources:
       wikidata_country_qid: Q219
       sparql_query_url: https://query.wikidata.org/sparql
@@ -230,9 +230,9 @@ countries:
       parties:
         - qid: Q138546752
           name: Progressive Bulgaria
-          position_score: -0.04999999999999999
+          position_score: null
           weight: 1
-      explanation: Progressive Bulgaria (ideology-based)
+      explanation: Progressive Bulgaria (no alignment data)
   BHR:
     score: null
     status: unknown
@@ -531,14 +531,19 @@ countries:
           weight: 1
       explanation: Convention for the Renewal of the Comoros (alignment)
   CPV:
-    score: null
-    status: unknown
+    score: -0.4
+    status: ok
     sources:
       wikidata_country_qid: Q1011
       sparql_query_url: https://query.wikidata.org/sparql
+      strategy: head_of_government
     government:
-      parties: []
-      explanation: No governing party data available
+      parties:
+        - qid: Q497464
+          name: African Party for the Independence of Cape Verde
+          position_score: -0.4
+          weight: 1
+      explanation: African Party for the Independence of Cape Verde (alignment)
   CRI:
     score: 0.6
     status: approx
