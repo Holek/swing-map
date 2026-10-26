@@ -1,4 +1,4 @@
-updated_at: '2026-07-03T23:11:05.642Z'
+updated_at: '2026-10-26T02:41:18.379Z'
 model:
   scale: '-1..+1'
   method: party-weighted average
@@ -220,7 +220,7 @@ countries:
           weight: 1
       explanation: Bangladesh Nationalist Party (no alignment data)
   BGR:
-    score: -0.04999999999999999
+    score: 0.5
     status: approx
     sources:
       wikidata_country_qid: Q219
@@ -230,7 +230,7 @@ countries:
       parties:
         - qid: Q138546752
           name: Progressive Bulgaria
-          position_score: -0.04999999999999999
+          position_score: 0.5
           weight: 1
       explanation: Progressive Bulgaria (ideology-based)
   BHR:
@@ -503,19 +503,19 @@ countries:
           weight: 1
       explanation: Congolese Party of Labour (alignment)
   COL:
-    score: -0.6000000000000001
-    status: ok
+    score: null
+    status: unknown
     sources:
       wikidata_country_qid: Q739
       sparql_query_url: https://query.wikidata.org/sparql
       strategy: head_of_government
     government:
       parties:
-        - qid: Q6025219
-          name: Humane Colombia
-          position_score: -0.6000000000000001
+        - qid: Q327591
+          name: independent politician
+          position_score: null
           weight: 1
-      explanation: Humane Colombia (alignment)
+      explanation: independent politician (no alignment data)
   COM:
     score: -0.4
     status: ok
@@ -531,14 +531,19 @@ countries:
           weight: 1
       explanation: Convention for the Renewal of the Comoros (alignment)
   CPV:
-    score: null
-    status: unknown
+    score: -0.4
+    status: ok
     sources:
       wikidata_country_qid: Q1011
       sparql_query_url: https://query.wikidata.org/sparql
+      strategy: head_of_government
     government:
-      parties: []
-      explanation: No governing party data available
+      parties:
+        - qid: Q497464
+          name: African Party for the Independence of Cape Verde
+          position_score: -0.4
+          weight: 1
+      explanation: African Party for the Independence of Cape Verde (alignment)
   CRI:
     score: 0.6
     status: approx
@@ -814,7 +819,7 @@ countries:
       parties: []
       explanation: No governing party data available
   GBR:
-    score: -0.4
+    score: -0.5
     status: ok
     sources:
       wikidata_country_qid: Q145
@@ -822,11 +827,15 @@ countries:
       strategy: head_of_government
     government:
       parties:
+        - qid: Q211931
+          name: Co-operative Party
+          position_score: -0.6
+          weight: 0.5
         - qid: Q9630
           name: Labour Party
           position_score: -0.4
-          weight: 1
-      explanation: Labour Party (alignment)
+          weight: 0.5
+      explanation: 'Coalition: Co-operative Party, Labour Party (alignment)'
   GEO:
     score: 0
     status: ok
@@ -1251,19 +1260,19 @@ countries:
           weight: 1
       explanation: Saint Kitts and Nevis Labour Party (alignment)
   KOR:
-    score: 0
-    status: ok
+    score: null
+    status: unknown
     sources:
       wikidata_country_qid: Q884
       sparql_query_url: https://query.wikidata.org/sparql
       strategy: head_of_government
     government:
       parties:
-        - qid: Q15978686
-          name: Democratic Party of Korea
-          position_score: 0
+        - qid: Q327591
+          name: independent politician
+          position_score: null
           weight: 1
-      explanation: Democratic Party of Korea (alignment)
+      explanation: independent politician (no alignment data)
   KWT:
     score: null
     status: unknown
@@ -1404,7 +1413,7 @@ countries:
           weight: 1
       explanation: Christian Social People's Party (alignment)
   LVA:
-    score: 0.4
+    score: 0
     status: ok
     sources:
       wikidata_country_qid: Q211
@@ -1412,21 +1421,13 @@ countries:
       strategy: head_of_government
     government:
       parties:
-        - qid: Q384826
-          name: Reform Party
-          position_score: 0.4
-          weight: 0.3333333333333333
-        - qid: Q98104169
-          name: New Unity
-          position_score: 0.4
-          weight: 0.3333333333333333
-        - qid: Q992046
-          name: Unity
-          position_score: 0.4
-          weight: 0.3333333333333333
-      explanation: 'Coalition: Reform Party, New Unity, Unity (alignment)'
+        - qid: Q113163582
+          name: United List
+          position_score: 0
+          weight: 0.5
+      explanation: United List (alignment)
   MAR:
-    score: 0.4
+    score: -0.2
     status: ok
     sources:
       wikidata_country_qid: Q1028
@@ -1434,11 +1435,11 @@ countries:
       strategy: head_of_government
     government:
       parties:
-        - qid: Q1630297
-          name: National Rally of Independents
-          position_score: 0.4
+        - qid: Q784586
+          name: Authenticity and Modernity Party
+          position_score: -0.2
           weight: 1
-      explanation: National Rally of Independents (alignment)
+      explanation: Authenticity and Modernity Party (alignment)
   MCO:
     score: null
     status: unknown
@@ -1821,14 +1822,19 @@ countries:
           weight: 1
       explanation: Realizing Goals (alignment)
   PER:
-    score: null
-    status: unknown
+    score: 0.8
+    status: approx
     sources:
       wikidata_country_qid: Q419
       sparql_query_url: https://query.wikidata.org/sparql
+      strategy: head_of_state
     government:
-      parties: []
-      explanation: No governing party data available
+      parties:
+        - qid: Q1472820
+          name: People's Force
+          position_score: 0.8
+          weight: 1
+      explanation: People's Force (alignment)
   PHL:
     score: -0.6
     status: approx
@@ -1872,7 +1878,7 @@ countries:
           weight: 1
       explanation: Pangu Party (alignment)
   POL:
-    score: 0.30000000000000004
+    score: 0.4
     status: ok
     sources:
       wikidata_country_qid: Q36
@@ -1880,15 +1886,11 @@ countries:
       strategy: head_of_government
     government:
       parties:
-        - qid: Q156868
-          name: Civic Platform
-          position_score: 0.2
-          weight: 0.5
         - qid: Q208242
           name: European People's Party
           position_score: 0.4
           weight: 0.5
-      explanation: 'Coalition: Civic Platform, European People''s Party (alignment)'
+      explanation: European People's Party (alignment)
   PRK:
     score: -1
     status: ok
@@ -1960,19 +1962,19 @@ countries:
           weight: 1
       explanation: independent politician (no alignment data)
   ROU:
-    score: 0.4
-    status: ok
+    score: null
+    status: unknown
     sources:
       wikidata_country_qid: Q218
       sparql_query_url: https://query.wikidata.org/sparql
       strategy: head_of_government
     government:
       parties:
-        - qid: Q686228
-          name: National Liberal Party
-          position_score: 0.4
+        - qid: Q327591
+          name: independent politician
+          position_score: null
           weight: 1
-      explanation: National Liberal Party (alignment)
+      explanation: independent politician (no alignment data)
   RUS:
     score: null
     status: unknown
@@ -2072,7 +2074,7 @@ countries:
           weight: 1
       explanation: Nuevas Ideas (alignment)
   SMR:
-    score: 0.5
+    score: 0.4
     status: approx
     sources:
       wikidata_country_qid: Q238
@@ -2082,23 +2084,23 @@ countries:
       parties:
         - qid: Q44282
           name: Sammarinese Christian Democratic Party
-          position_score: 0.5
+          position_score: 0.4
           weight: 1
-      explanation: Sammarinese Christian Democratic Party (ideology-based)
+      explanation: Sammarinese Christian Democratic Party (alignment)
   SOM:
-    score: null
-    status: unknown
+    score: 0.4
+    status: ok
     sources:
       wikidata_country_qid: Q1045
       sparql_query_url: https://query.wikidata.org/sparql
       strategy: head_of_government
     government:
       parties:
-        - qid: Q327591
-          name: independent politician
-          position_score: null
+        - qid: Q60775601
+          name: Union for Peace and Development Party
+          position_score: 0.4
           weight: 1
-      explanation: independent politician (no alignment data)
+      explanation: Union for Peace and Development Party (alignment)
   SRB:
     score: null
     status: unknown
@@ -2464,7 +2466,7 @@ countries:
         - qid: Q1146334
           name: Uzbekistan Liberal Democratic Party
           position_score: 0.2
-          weight: 1
+          weight: 0.5
       explanation: Uzbekistan Liberal Democratic Party (alignment)
   VAT:
     score: null
